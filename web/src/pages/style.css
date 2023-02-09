@@ -35,9 +35,10 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    direction: ltr;
+    direction: ltr !important;
 }
 
 .table-container {
-  height: 100vh;
+    direction: ltr !important;
+    height: 100vh;
 }
