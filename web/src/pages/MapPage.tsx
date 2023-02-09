@@ -10,7 +10,7 @@ const SyriaLocation: LatLngTuple = [36.272909, 37.045475];
 
 const customMarker = new L.Icon({
     iconUrl:
-        "https://w7.pngwing.com/pngs/236/41/png-transparent-illustration-of-map-icon-google-map-maker-google-maps-computer-icons-map-marker-text-heart-logo-thumbnail.png",
+        "https://i.pinimg.com/736x/be/9d/56/be9d56183d71d7433edbf8b52c30fcba.jpg",
     iconSize: [38, 95],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76],
