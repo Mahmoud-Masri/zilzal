@@ -11,7 +11,7 @@ const status: RequestStatus[] = ["Canceled", "Done", "New", "InProgress"];
 
 export default function ListRequests() {
     const [data, setData] = useState<HelpRequest[]>([]);
-    const [filter, setFilter] = useState<RequestStatus | null>(null);
+    const [filter, setFilter] = useState<RequestStatus>("New");
     useEffect(() => {
         listRequests().then((data) => {
             console.log(data);
@@ -39,7 +39,7 @@ export default function ListRequests() {
         });
     };
 
-    const filteredData = useMemo(() => (filter ? data.filter((x) => x.status === filter) : data), [data, filter]);
+    const filteredData = useMemo(() => data.filter((x) => x.status === filter), [data, filter]);
 
     if (!data) {
         return <div>Loading...</div>;
