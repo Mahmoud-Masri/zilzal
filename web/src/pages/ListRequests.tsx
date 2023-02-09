@@ -99,7 +99,12 @@ export default function ListRequests() {
                     columns={[
                         { field: "_id", headerName: "_id" },
                         { field: "type", headerName: "الخدمة" },
-                        { field: "status", headerName: "الحالة", valueFormatter: (params) => {} },
+                        {
+                            field: "status",
+                            headerName: "الحالة",
+                            type: "singleSelect",
+                            valueOptions: ["New", "InProgress", "Done", "Canceled"],
+                        },
                         { field: "reportedSeverity", headerName: "الاهمية المطلوبة" },
                         {
                             field: "internalNotes",

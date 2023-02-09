@@ -99,8 +99,13 @@ export default function ListProviders() {
                     columns={[
                         { field: "_id", headerName: "_id" },
                         { field: "type", headerName: "الخدمة" },
-                        { field: "status", headerName: "الحالة" },
-                        { field: "hasCar", headerName: "توفر عربية" },
+                        {
+                            field: "status",
+                            headerName: "الحالة",
+                            type: "singleSelect",
+                            valueOptions: ["New", "InProgress", "Done", "Canceled"],
+                        },
+                        { field: "hasCar", headerName: "توفر عربية", type: "boolean" },
                         {
                             field: "internalNotes",
                             headerName: "ملاحظات داخلية",
