@@ -57,6 +57,11 @@ export interface HelpRequest {
         | WarmingProps
         | OtherProps;
     token: string;
+
+    located: boolean;
+    country?: string;
+    region?: string;
+    city?: string;
 }
 
 export interface HelpProvider {
