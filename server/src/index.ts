@@ -39,6 +39,6 @@ if (process.env.ENABLE_SSL === "true") {
     });
 } else {
     app.listen(3001, () => {
-        console.log("Server is running on port 3000");
+        console.log("Server is running on port 3001");
     });
 }

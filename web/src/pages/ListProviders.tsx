@@ -21,6 +21,7 @@ export default function ListProviders() {
                 className="table"
                 getRowId={(row) => row._id}
                 rows={data}
+                experimentalFeatures={{ newEditingApi: true }} 
                 columns={[
                     { field: "_id", headerName: "_id" },
                     { field: "type", headerName: "الخدمة" },

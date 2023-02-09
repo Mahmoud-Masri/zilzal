@@ -1,13 +1,12 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
-import { map } from "lodash"
-import { useCallback, useState } from "react"
-import requestHelp from "../apis/requestHelp"
-import { RequestSeverity, RequestType } from "../db"
-import generateUniqueId from "../generateUniqueId"
-import { useCurrentLocation } from "../hooks/useCurrentLocation"
-import { token } from "../token"
-import { services } from "./ProvideHelp"
-
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { map } from "lodash";
+import { useCallback, useState } from "react";
+import requestHelp from "../apis/requestHelp";
+import { RequestSeverity, RequestType } from "../db";
+import generateUniqueId from "../generateUniqueId";
+import { useCurrentLocation } from "../hooks/useCurrentLocation";
+import { token } from "../token";
+import { services } from "./ProvideHelp";
 
 const severity: Record<RequestSeverity, string> = {
     unclassified: "غير مصنف",
@@ -27,26 +26,33 @@ export default function RequestHelp() {
     const [status, location] = useCurrentLocation();
 
     const submit = useCallback(async () => {
-        const _id = generateUniqueId();
-        const res = await requestHelp({
-            phoneNumber: phone,
-            address,
-            type: service,
-            note,
-            contactInfo,
-            lat: location?.lat,
-            lng: location?.lng,
-            token: token,
-            _id,
-            severity: "unclassified",
-            status: "New",
-            reportedSeverity,
-            props: {},
-        });
+        try {
+            const _id = generateUniqueId();
+            const res = await requestHelp({
+                phoneNumber: phone,
+                address,
+                type: service,
+                note,
+                contactInfo,
+                lat: location?.lat,
+                lng: location?.lng,
+                token: token,
+                _id,
+                severity: "unclassified",
+                status: "New",
+                reportedSeverity,
+                props: {},
+            });
 
-        if (res.ok) {
-            alert("تم الإرسال بنجاح");
-        } else {
+            if (res.ok) {
+                alert("تم الإرسال بنجاح");
+                window.location.href = "/success";
+            } else {
+                alert("حدث خطأ");
+            }
+
+        } catch (e) {
+            console.error(e);
             alert("حدث خطأ");
         }
     }, [address, contactInfo, location?.lat, location?.lng, note, phone, reportedSeverity, service]);

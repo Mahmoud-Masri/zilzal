@@ -38,24 +38,31 @@ export default function ProvideHelp() {
     const [status, location] = useCurrentLocation();
 
     const submit = useCallback(async () => {
-        const _id = generateUniqueId();
-        const res = await provideHelp({
-            phoneNumber: phone,
-            address,
-            type: service,
-            note,
-            contactInfo,
-            hasCar,
-            lat: location?.lat,
-            lng: location?.lng,
-            token: token,
-            _id,
-            status: "New",
-        });
+        try {
+            const _id = generateUniqueId();
+            const res = await provideHelp({
+                phoneNumber: phone,
+                address,
+                type: service,
+                note,
+                contactInfo,
+                hasCar,
+                lat: location?.lat,
+                lng: location?.lng,
+                token: token,
+                _id,
+                status: "New",
+            });
 
-        if (res.ok) {
-            alert("تم الإرسال بنجاح");
-        } else {
+            if (res.ok) {
+                alert("تم الإرسال بنجاح");
+                window.location.href = "/success";
+            } else {
+                alert("حدث خطأ");
+            }
+        } catch (e) {
+            console.error(e);
+
             alert("حدث خطأ");
         }
     }, [address, contactInfo, hasCar, location?.lat, location?.lng, note, phone, service]);
