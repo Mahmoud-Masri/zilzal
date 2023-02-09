@@ -7,6 +7,10 @@ export default function Home() {
     const provideHelp = useCallback(() => {
         window.location.href = "/provide-help";
     }, []);
+    const goToMap = useCallback(() => {
+        window.location.href = "/map";
+    }, []);
+
     return (
         <div className="container home-container">
             <h1 className="title">هذا الموقع لطلب وعرض المساعدة في ما يتعلق بالزلزال في الشمال السوري</h1>
@@ -15,6 +19,9 @@ export default function Home() {
             </div>
             <div className="card" onClick={provideHelp}>
                 <span>تقديم مساعدة</span>
+            </div>
+            <div className="card" onClick={goToMap}>
+                <span>الخريطة</span>
             </div>
         </div>
     );
