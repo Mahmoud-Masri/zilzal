@@ -56,5 +56,12 @@ export interface HelpRequest {
 
 
 interface HelpProvider {
-
+    type: RequestType;
+    contactInfo: string;
+    phoneNumber: string;
+    location: string;
+    note: string;
+    lat: number;
+    log: number;
+    hasCar: boolean;
 }
