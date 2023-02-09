@@ -33,6 +33,9 @@ export default function ListProviders() {
                     { field: "status", headerName: "الحالة" },
                     { field: "lat", headerName: "lat" },
                     { field: "lng", headerName: "lng" },
+                    { field: "country", headerName: "الدولة(تلقائي)" },
+                    { field: "region", headerName: "المحافظة(تلقائي)" },
+                    { field: "city", headerName: "المنطقة(تلقائي)" },
                 ]}
             />
         </div>

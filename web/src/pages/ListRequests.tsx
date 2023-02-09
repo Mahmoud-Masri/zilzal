@@ -33,6 +33,9 @@ export default function ListRequests() {
                     { field: "note", headerName: "ملاحظات" },
                     { field: "lat", headerName: "lat" },
                     { field: "lng", headerName: "lng" },
+                    { field: "country", headerName: "الدولة(تلقائي)" },
+                    { field: "region", headerName: "المحافظة(تلقائي)" },
+                    { field: "city", headerName: "المنطقة(تلقائي)" },
                 ]}
             />
         </div>
