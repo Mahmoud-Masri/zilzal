@@ -101,25 +101,21 @@ export default function ListRequests() {
                         { field: "type", headerName: "الخدمة" },
                         { field: "status", headerName: "الحالة", valueFormatter: (params) => {} },
                         { field: "reportedSeverity", headerName: "الاهمية المطلوبة" },
-                        { field: "severity", headerName: "الاهمية" },
-                        { field: "contactInfo", headerName: "معلومات التواصل" },
-                        { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
-                        { field: "address", headerName: "العنوان" },
-                        {
-                            field: "note",
-                            headerName: "ملاحظات",
-                        },
-                        { field: "lat", headerName: "lat" },
-                        { field: "lng", headerName: "lng" },
-                        { field: "country", headerName: "الدولة(تلقائي)" },
-                        { field: "region", headerName: "المحافظة(تلقائي)" },
-                        { field: "city", headerName: "المنطقة(تلقائي)" },
                         {
                             field: "internalNotes",
                             headerName: "ملاحظات داخلية",
                             editable: true,
                             minWidth: 300,
                         },
+                        // { field: "severity", headerName: "الاهمية" },
+                        { field: "phoneNumber", headerName: "رقم الهاتف", width: 150 },
+                        { field: "address", headerName: "العنوان", width: 280 },
+                        {
+                            field: "note",
+                            headerName: "ملاحظات",
+                            width: 300,
+                        },
+
                         {
                             field: "actions",
                             headerName: "اجراءات",
@@ -155,6 +151,12 @@ export default function ListRequests() {
                                 );
                             },
                         },
+                        { field: "contactInfo", headerName: "معلومات التواصل", width: 200 },
+                        { field: "lat", headerName: "lat" },
+                        { field: "lng", headerName: "lng" },
+                        { field: "country", headerName: "الدولة(تلقائي)" },
+                        { field: "region", headerName: "المحافظة(تلقائي)" },
+                        { field: "city", headerName: "المنطقة(تلقائي)" },
                     ]}
                 />
             </Box>

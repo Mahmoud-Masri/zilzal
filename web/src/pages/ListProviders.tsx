@@ -99,26 +99,22 @@ export default function ListProviders() {
                     columns={[
                         { field: "_id", headerName: "_id" },
                         { field: "type", headerName: "الخدمة" },
-                        { field: "hasCar", headerName: "توفر عربية" },
-                        { field: "contactInfo", headerName: "معلومات التواصل" },
-                        { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
-                        { field: "address", headerName: "العنوان" },
-                        {
-                            field: "note",
-                            headerName: "ملاحظات",
-                        },
                         { field: "status", headerName: "الحالة" },
-                        { field: "lat", headerName: "lat" },
-                        { field: "lng", headerName: "lng" },
-                        { field: "country", headerName: "الدولة(تلقائي)" },
-                        { field: "region", headerName: "المحافظة(تلقائي)" },
-                        { field: "city", headerName: "المنطقة(تلقائي)" },
+                        { field: "hasCar", headerName: "توفر عربية" },
                         {
                             field: "internalNotes",
                             headerName: "ملاحظات داخلية",
                             editable: true,
                             minWidth: 300,
                         },
+                        { field: "phoneNumber", headerName: "رقم الهاتف", width: 150 },
+                        { field: "address", headerName: "العنوان", width: 280 },
+                        {
+                            field: "note",
+                            headerName: "ملاحظات",
+                            width: 300,
+                        },
+
                         {
                             field: "actions",
                             headerName: "اجراءات",
@@ -156,6 +152,13 @@ export default function ListProviders() {
                                 );
                             },
                         },
+                        { field: "lat", headerName: "lat" },
+                        { field: "lng", headerName: "lng" },
+                        { field: "country", headerName: "الدولة(تلقائي)" },
+                        { field: "region", headerName: "المحافظة(تلقائي)" },
+                        { field: "city", headerName: "المنطقة(تلقائي)" },
+
+                        { field: "contactInfo", headerName: "معلومات التواصل" },
                     ]}
                 />
             </Box>
