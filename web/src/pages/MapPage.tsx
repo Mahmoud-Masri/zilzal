@@ -53,6 +53,7 @@ export default function MapPage() {
                                         تقديم مساعدة
                                         {provider.phoneNumber} <br /> {provider.address} <br /> {provider.status} <br />{" "}
                                         النوع :{provider.type}
+                                        <br /> {provider._id}
                                     </Popup>
                                 </Marker>
                             )
@@ -68,6 +69,7 @@ export default function MapPage() {
                                         طلب مساعدة
                                         {request.phoneNumber} <br /> {request.address} <br /> الحالة :{request.status}{" "}
                                         <br /> النوع :{request.type}
+                                        <br /> {request._id}
                                     </Popup>
                                 </Marker>
                             )
