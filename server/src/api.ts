@@ -55,7 +55,7 @@ api.get("/providers", async (req, res) => {
 api.put("/requests/:requestId", async (req, res) => {
     try {
         const collection = await getCollection("requests");
-        await collection.updateOne({ _id: req.params.requestId }, req.body);
+        await collection.updateOne({ _id: req.params.requestId }, { $set: req.body });
         const request = await collection.findOne({ _id: req.params.requestId });
         res.send(request);
     } catch (e) {
@@ -67,7 +67,7 @@ api.put("/requests/:requestId", async (req, res) => {
 api.put("/providers/:providerId", async (req, res) => {
     try {
         const collection = await getCollection("providers");
-        await collection.updateOne({ _id: req.params.providerId }, req.body);
+        await collection.updateOne({ _id: req.params.providerId }, { $set: req.body });
         const provider = await collection.findOne({ _id: req.params.providerId });
         res.send(provider);
     } catch (e) {
