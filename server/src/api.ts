@@ -7,6 +7,7 @@ api.post("/request-help", async (req, res) => {
     try {
         const collection = await getCollection("requests");
         const data = req.body;
+        data['status'] = "New";
         await collection.insertOne(data);
         res.send({ ok: true });
     } catch (e) {
