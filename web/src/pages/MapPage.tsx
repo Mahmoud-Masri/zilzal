@@ -49,7 +49,7 @@ export default function MapPage() {
                             <Marker key={i} icon={greenMarker} position={[provider.lat!, provider.lng!]}>
                                 <Popup>
                                     تقديم مساعدة
-                                    {provider.contactInfo} <br /> {provider.address} <br /> {provider.status}
+                                    {provider.contactInfo} <br /> {provider.address} <br /> {provider.status} <br />  النوع :{provider.type}
                                 </Popup>
                             </Marker>
                         )
@@ -61,7 +61,7 @@ export default function MapPage() {
                             <Marker key={i} icon={redMarker} position={[request.lat!, request.lng!]}>
                                 <Popup>
                                 طلب مساعدة
-                                {request.contactInfo} <br /> {request.address} <br /> الحالة :{request.status}
+                                {request.contactInfo} <br /> {request.address} <br /> الحالة :{request.status} <br /> النوع :{request.type}
                                 </Popup>
                             </Marker>
                         )
