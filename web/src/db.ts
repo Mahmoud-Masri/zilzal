@@ -70,4 +70,5 @@ export interface HelpProvider {
     lng?: number;
     hasCar: boolean;
     token: string;
+    status: RequestStatus
 }

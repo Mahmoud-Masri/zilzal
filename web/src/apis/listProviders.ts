@@ -1,3 +1,4 @@
+import { HelpProvider } from "../db"
 import { SERVER_URL } from "./url"
 
 export default async function listProviders() {
@@ -5,5 +6,6 @@ export default async function listProviders() {
         method: "GET",
     });
 
-    return req.json();
+    const data = await req.json()
+    return data as HelpProvider[]
 }

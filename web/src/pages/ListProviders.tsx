@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { DataGridPremium } from "@mui/x-data-grid-premium";
-import listProviders from "../apis/listProviders";
+import { DataGridPremium } from "@mui/x-data-grid-premium"
+import { useEffect, useState } from "react"
+import listProviders from "../apis/listProviders"
+import { HelpProvider } from "../db"
 
 export default function ListProviders() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<HelpProvider[]>([]);
     useEffect(() => {
         listProviders().then((data) => {
             setData(data);
@@ -13,9 +14,26 @@ export default function ListProviders() {
     if (!data) {
         return <div>Loading...</div>;
     }
+
     return (
-        <div>
-            <DataGridPremium rows={data} columns={[{ field: "id", headerName: "ID", width: 70 }]} />
+        <div className="container table-container">
+            <DataGridPremium
+                className="table"
+                getRowId={(row) => row._id}
+                rows={data}
+                columns={[
+                    { field: "_id", headerName: "_id" },
+                    { field: "type", headerName: "الخدمة" },
+                    { field: "hasCar", headerName: "توفر عربية" },
+                    { field: "contactInfo", headerName: "معلومات التواصل" },
+                    { field: "phoneNumber", headerName: "رقم الهاتف" },
+                    { field: "address", headerName: "العنوان" },
+                    { field: "note", headerName: "ملاحظات" },
+                    { field: "status", headerName: "الحالة" },
+                    { field: "lat", headerName: "lat" },
+                    { field: "lng", headerName: "lng" },
+                ]}
+            />
         </div>
     );
 }
