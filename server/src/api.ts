@@ -7,7 +7,7 @@ api.post("/request-help", async (req, res) => {
     try {
         const collection = await getCollection("requests");
         const data = req.body;
-        data['status'] = "New";
+        data["status"] = "New";
         await collection.insertOne(data);
         res.send({ ok: true });
     } catch (e) {
@@ -33,7 +33,7 @@ api.post("/provide-help", async (req, res) => {
 api.get("/requests", async (req, res) => {
     try {
         const collection = await getCollection("requests");
-        const requests = await collection.find({status: {$in: ["New", "InProgress"]}}).toArray();
+        const requests = await collection.find({ status: { $in: ["New", "InProgress"] } }).toArray();
         res.send(requests);
     } catch (e) {
         console.log(e);
@@ -52,10 +52,22 @@ api.get("/providers", async (req, res) => {
     }
 });
 
-api.get("/requests/:requestId", async (req, res) => {
+api.put("/requests/:requestId", async (req, res) => {
     try {
         const collection = await getCollection("requests");
-        await collection.updateOne({ _id: req.params.requestId }, req.body);
+        await collection.updateOne({ _id: req.params.requestId }, { $set: req.body });
+        const request = await collection.findOne({ _id: req.params.requestId });
+        res.send(request);
+    } catch (e) {
+        console.log(e);
+        res.send({ ok: false });
+    }
+});
+
+api.put("/providers/:providerId", async (req, res) => {
+    try {
+        const collection = await getCollection("providers");
+        await collection.updateOne({ _id: req.params.requestId }, { $set: req.body });
         const request = await collection.findOne({ _id: req.params.requestId });
         res.send(request);
     } catch (e) {
