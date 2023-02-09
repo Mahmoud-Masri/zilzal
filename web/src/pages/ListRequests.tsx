@@ -1,11 +1,11 @@
-import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { DataGridPremium } from "@mui/x-data-grid-premium";
-import { useEffect, useMemo, useState } from "react";
-import listRequests from "../apis/listRequests";
-import updateRequest from "../apis/updateRequest";
-import { HelpRequest, RequestStatus } from "../db";
-import { useHideTableStamp } from "../hooks/useHideTableStamp";
-import map from "lodash/map";
+import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
+import { DataGridPremium } from "@mui/x-data-grid-premium"
+import map from "lodash/map"
+import { useEffect, useMemo, useState } from "react"
+import listRequests from "../apis/listRequests"
+import { UpdateRequest } from "../apis/requestHelp"
+import { HelpRequest, RequestStatus } from "../db"
+import { useHideTableStamp } from "../hooks/useHideTableStamp"
 
 const status: RequestStatus[] = ["Canceled", "Done", "New", "InProgress"];
 
@@ -22,19 +22,19 @@ export default function ListRequests() {
     useHideTableStamp();
 
     const deleteRow = (id) => {
-        updateRequest(id, "Canceled").then(() => {
+        UpdateRequest(id, { status: "Canceled" }).then(() => {
             setData(data.map((row) => (row._id === id ? { ...row, status: "Canceled" } : row)));
         });
     };
 
     const inProgress = (id) => {
-        updateRequest(id, "InProgress").then(() => {
+        UpdateRequest(id, { status: "InProgress" }).then(() => {
             setData(data.map((row) => (row._id === id ? { ...row, status: "InProgress" } : row)));
         });
     };
 
     const done = (id) => {
-        updateRequest(id, "Done").then(() => {
+        UpdateRequest(id, { status: "Done" }).then(() => {
             setData(data.map((row) => (row._id === id ? { ...row, status: "Done" } : row)));
         });
     };
@@ -73,7 +73,7 @@ export default function ListRequests() {
                     { field: "reportedSeverity", headerName: "الاهمية المطلوبة" },
                     { field: "severity", headerName: "الاهمية" },
                     { field: "contactInfo", headerName: "معلومات التواصل" },
-                    { field: "phoneNumber", headerName: "رقم الهاتف" },
+                    { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
                     { field: "address", headerName: "العنوان" },
                     { field: "note", headerName: "ملاحظات" },
                     { field: "lat", headerName: "lat" },

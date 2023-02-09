@@ -1,10 +1,11 @@
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
 import { DataGridPremium } from "@mui/x-data-grid-premium";
 import { useEffect, useMemo, useState } from "react";
 import listProviders from "../apis/listProviders";
 import { HelpProvider, RequestStatus } from "../db";
 import { useHideTableStamp } from "../hooks/useHideTableStamp";
 import map from "lodash/map";
+import { UpdateProvide } from "../apis/provideHelp";
 
 const status: RequestStatus[] = ["Canceled", "Done", "New", "InProgress"];
 
@@ -20,6 +21,23 @@ export default function ListProviders() {
     useHideTableStamp();
     const filteredData = useMemo(() => data.filter((x) => x.status === filter), [data, filter]);
 
+    const deleteRow = (id) => {
+        UpdateProvide(id, { status: "Canceled" }).then(() => {
+            setData(data.map((row) => (row._id === id ? { ...row, status: "Canceled" } : row)));
+        });
+    };
+
+    const inProgress = (id) => {
+        UpdateProvide(id, { status: "InProgress" }).then(() => {
+            setData(data.map((row) => (row._id === id ? { ...row, status: "InProgress" } : row)));
+        });
+    };
+
+    const done = (id) => {
+        UpdateProvide(id, { status: "Done" }).then(() => {
+            setData(data.map((row) => (row._id === id ? { ...row, status: "Done" } : row)));
+        });
+    };
     if (!data) {
         return <div>Loading...</div>;
     }
@@ -51,7 +69,7 @@ export default function ListProviders() {
                     { field: "type", headerName: "الخدمة" },
                     { field: "hasCar", headerName: "توفر عربية" },
                     { field: "contactInfo", headerName: "معلومات التواصل" },
-                    { field: "phoneNumber", headerName: "رقم الهاتف" },
+                    { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
                     { field: "address", headerName: "العنوان" },
                     { field: "note", headerName: "ملاحظات" },
                     { field: "status", headerName: "الحالة" },
@@ -60,6 +78,54 @@ export default function ListProviders() {
                     { field: "country", headerName: "الدولة(تلقائي)" },
                     { field: "region", headerName: "المحافظة(تلقائي)" },
                     { field: "city", headerName: "المنطقة(تلقائي)" },
+                    {
+                        field: "delete",
+                        headerName: "حذف",
+                        renderCell: (params) => {
+                            return (
+                                <Button
+                                    disabled={params.row.status === "Canceled"}
+                                    variant="contained"
+                                    color="error"
+                                    onClick={() => deleteRow(params.row._id)}
+                                >
+                                    حذف
+                                </Button>
+                            );
+                        },
+                    },
+                    {
+                        field: "inProgress",
+                        headerName: " قيد التنفيذ",
+                        renderCell: (params) => {
+                            return (
+                                <Button
+                                    disabled={params.row.status === "InProgress"}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => inProgress(params.row._id)}
+                                >
+                                    قيد التنفيذ
+                                </Button>
+                            );
+                        },
+                    },
+                    {
+                        field: "done",
+                        headerName: "تم الانجاز",
+                        renderCell: (params) => {
+                            return (
+                                <Button
+                                    disabled={params.row.status === "Done"}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => done(params.row._id)}
+                                >
+                                    تم الانجاز
+                                </Button>
+                            );
+                        },
+                    },
                 ]}
             />
         </div>

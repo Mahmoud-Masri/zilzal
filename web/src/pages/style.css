@@ -44,7 +44,21 @@
     height: 100vh;
 }
 
-iframe
-{
+iframe {
     display: none;
+}
+
+.MuiDataGrid-columnSeparator--sideRight {
+    right: unset !important;
+    left: -8px;
+}
+
+#root {
+  height: 100vh;
+}
+
+.map-container {
+  height: 100%;
+  overflow: hidden;
+  padding:64px;
 }

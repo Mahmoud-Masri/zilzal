@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { getCollection } from "./mongo";
+import { Router } from "express"
+import { getCollection } from "./mongo"
 
 export const api = Router();
 
@@ -33,7 +33,7 @@ api.post("/provide-help", async (req, res) => {
 api.get("/requests", async (req, res) => {
     try {
         const collection = await getCollection("requests");
-        const requests = await collection.find({ status: { $in: ["New", "InProgress"] } }).toArray();
+        const requests = await collection.find({}).toArray();
         res.send(requests);
     } catch (e) {
         console.log(e);

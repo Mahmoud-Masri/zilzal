@@ -13,8 +13,8 @@ export default async function provideHelp(data: HelpProvider) {
     return req.json();
 }
 
-export async function UpdateProvide(id: string, data: HelpProvider) {
-    const req = await fetch(SERVER_URL + "/api/provides" + id, {
+export async function UpdateProvide(id: string, data: Partial<HelpProvider>) {
+    const req = await fetch(SERVER_URL + "/api/providers/" + id, {
         method: "PUT",
         body: JSON.stringify(data),
         headers: {
