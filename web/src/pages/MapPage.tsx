@@ -1,21 +1,27 @@
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import listProviders from "../apis/listProviders";
 import listRequests from "../apis/listRequests";
 import { HelpProvider, HelpRequest } from "../db";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 const SyriaLocation: LatLngTuple = [36.272909, 37.045475];
 
-const customMarker = new L.Icon({
-    iconUrl:
-        "https://i.pinimg.com/736x/be/9d/56/be9d56183d71d7433edbf8b52c30fcba.jpg",
-    iconSize: [38, 95],
+const redMarker = new L.Icon({
+    iconUrl: "/red-marker.png",
+    iconSize: [25, 50],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76],
 });
 
+const greenMarker = new L.Icon({
+    iconUrl: "/green-marker.png",
+    iconSize: [25, 50],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+});
 
 export default function MapPage() {
     const [providers, setProviders] = useState<HelpProvider[]>([]);
@@ -39,13 +45,15 @@ export default function MapPage() {
                 {providers.map(
                     (provider, i) =>
                         provider.lat &&
-                        provider.lng && <Marker key={i} position={[provider.lat!, provider.lng!]}></Marker>
+                        provider.lng && (
+                            <Marker key={i} icon={greenMarker} position={[provider.lat!, provider.lng!]}></Marker>
+                        )
                 )}
                 {request.map(
                     (request, i) =>
                         request.lat &&
                         request.lng && (
-                            <Marker key={i} icon={customMarker} position={[request.lat!, request.lng!]}></Marker>
+                            <Marker key={i} icon={redMarker} position={[request.lat!, request.lng!]}></Marker>
                         )
                 )}
             </MapContainer>
