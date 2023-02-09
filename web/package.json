@@ -25,7 +25,9 @@
         "tss-react": "^4.6.0",
         "typescript": "^4.9.5",
         "web-vitals": "^2.1.4",
-        "firebase-tools": "^11.22.0"
+        "firebase-tools": "^11.22.0",
+        "lodash": "^4.17.21",
+        "@types/lodash": "^4.14.191"
     },
     "scripts": {
         "start": "react-scripts start",

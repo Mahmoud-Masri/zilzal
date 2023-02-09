@@ -1,10 +1,69 @@
-export type RequestType = ''
+export type RequestType =
+    "Transportation" |
+    "Residence" |
+    "Food" |
+    "Clothing" |
+    "Medical" |
+    "Warming" |
+    "Medicine" |
+    "Other"
+
+export type RequestStatus =
+    "New" |
+    "InProgress" |
+    "Done" |
+    "Canceled"
+
+export type RequestSeverity =
+    "critical" |
+    "normal"
+
+export type TransportationProps = {
+    address: string;
+    lat: number;
+    lng: number;
+}
+export type ResidenceProps = {
+    address: string;
+    lat: number;
+    lng: number;
+}
+export type FoodProps = {}
+export type WearProps = {
+    gender: "male" | "female"
+    size: "children" | "xs" | "s" | "m" | "l" | "xl"
+    type: "shoes" | "clothes"
+}
+export type CleaningProps = {}
+export type MedicalProps = {}
+export type WarmingProps = {
+    type: "wood" | "electricHeater"
+}
+export type OtherProps = {}
+
 export interface HelpRequest {
-    type: RequestType
-    contactInfo: string
+    type: RequestType;
+    status: RequestStatus;
+    severity: RequestSeverity;
+    contactInfo: string;
+    phoneNumber: string;
+    address: string;
+    note: string;
+    lat?: number;
+    lng?: number;
+    props: TransportationProps | ResidenceProps | FoodProps | WearProps | CleaningProps | MedicalProps | WarmingProps | OtherProps;
+    token: string
 }
 
 
 export interface HelpProvider {
-    
+    type: RequestType;
+    contactInfo: string;
+    phoneNumber: string;
+    address: string;
+    note: string;
+    lat?: number;
+    lng?: number;
+    hasCar: boolean;
+    token: string
 }

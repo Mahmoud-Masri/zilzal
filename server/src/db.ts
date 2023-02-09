@@ -2,10 +2,10 @@ export type RequestType =
     "Transportation" |
     "Residence" |
     "Food" |
-    "Wear" |
-    "Cleaning" |
+    "Clothing" |
     "Medical" |
     "Warming" |
+    "Medicine" |
     "Other"
 
 export type RequestStatus =
@@ -19,14 +19,14 @@ export type RequestSeverity =
     "normal"
 
 export type TransportationProps = {
-    location: string;
+    address: string;
     lat: number;
-    lon: number;
+    lng: number;
 }
 export type ResidenceProps = {
-    location: string;
+    address: string;
     lat: number;
-    lon: number;
+    lng: number;
 }
 export type FoodProps = {}
 export type WearProps = {
@@ -47,21 +47,23 @@ export interface HelpRequest {
     severity: RequestSeverity;
     contactInfo: string;
     phoneNumber: string;
-    location: string;
+    address: string;
     note: string;
-    lat: number;
-    log: number;
+    lat?: number;
+    lng?: number;
     props: TransportationProps | ResidenceProps | FoodProps | WearProps | CleaningProps | MedicalProps | WarmingProps | OtherProps;
+    token: string
 }
 
 
-interface HelpProvider {
+export interface HelpProvider {
     type: RequestType;
     contactInfo: string;
     phoneNumber: string;
-    location: string;
+    address: string;
     note: string;
-    lat: number;
-    log: number;
+    lat?: number;
+    lng?: number;
     hasCar: boolean;
+    token: string
 }
