@@ -6,7 +6,7 @@ export function useCurrentLocation() {
     const [location, setLocation] = useState({})
     useEffect(() => {
         if (navigator.geolocation) {
-            const cb = (position) => {
+            const cb = (position: GeolocationPosition) => {
                 setLocation({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
