@@ -1,14 +1,19 @@
 import fetch from "node-fetch";
 import { getCollection } from "./mongo";
 
-setInterval(updateLocation, 1100);
-
 async function updateLocation() {
     const apiKey = "152819648043015562220x45949";
 
     const collection = await getCollection("requests");
-    const req = await collection.findOne({ located: false, lat: { $exists: true }, lng: { $exists: true } });
+
+    const req = await collection.findOne({
+        located: { $exists: false },
+        lat: { $exists: true },
+        lng: { $exists: true },
+    });
+
     if (!req) {
+        setTimeout(updateLocation, 1100);
         return;
     }
 
@@ -28,5 +33,9 @@ async function updateLocation() {
         );
     } catch (error) {
         console.log(error);
+    } finally {
+        setTimeout(updateLocation, 1100);
     }
 }
+
+updateLocation()
