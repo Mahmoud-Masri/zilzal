@@ -1,13 +1,13 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/Home";
-import ListProviders from "./pages/ListProviders";
-import ListRequests from "./pages/ListRequests";
-import ProvideHelp from "./pages/ProvideHelp";
-import RequestHelp from "./pages/RequestHelp";
-import Root from "./pages/Root";
-
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
+import "./App.css"
+import Home from "./pages/Home"
+import ListProviders from "./pages/ListProviders"
+import ListRequests from "./pages/ListRequests"
+import ProvideHelp from "./pages/ProvideHelp"
+import RequestHelp from "./pages/RequestHelp"
+import Root from "./pages/Root"
+import Success from "./pages/success"
 import MapPage from "./pages/MapPage";
 
 const theme = createTheme({
@@ -17,6 +17,7 @@ const theme = createTheme({
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />}>
+            <Route path="success" element={<Success />} />
             <Route path="provide-help" element={<ProvideHelp />} />
             <Route path="request-help" element={<RequestHelp />} />
             <Route path="list-requests" element={<ListRequests />} />

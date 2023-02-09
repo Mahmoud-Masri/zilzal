@@ -1,9 +1,11 @@
+import { HelpRequest } from "../db"
 import { SERVER_URL } from "./url"
 
-export default async function listRequests() {
+export default async function listProviders() {
     const req = await fetch(SERVER_URL + "/api/requests", {
         method: "GET",
     });
 
-    return req.json();
+    const data = await req.json()
+    return data as HelpRequest[]
 }

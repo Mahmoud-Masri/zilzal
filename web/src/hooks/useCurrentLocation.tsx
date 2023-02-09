@@ -1,25 +1,22 @@
-import { useEffect, useState } from "react"
-
-
+import { useEffect, useState } from "react";
 
 export function useCurrentLocation() {
-    const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading")
-    const [location, setLocation] = useState({})
+    const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
+    const [location, setLocation] = useState<{ lat: number; lng: number }>();
     useEffect(() => {
         if (navigator.geolocation) {
-            const cb = (position) => {
+            const cb = (position: GeolocationPosition) => {
                 setLocation({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
-                })
-                setStatus("loaded")
-            }
-            console.log(cb)
-            navigator.geolocation.getCurrentPosition(cb)
+                });
+                setStatus("loaded");
+            };
+            navigator.geolocation.getCurrentPosition(cb);
         } else {
-            setStatus("error")
+            setStatus("error");
         }
-    }, [])
+    }, []);
 
-    return [status, location]
+    return [status, location] as const;
 }

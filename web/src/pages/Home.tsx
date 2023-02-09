@@ -15,9 +15,9 @@ export default function Home() {
         window.location.href = "/map";
     }, []);
 
-
     return (
-        <div className={classes.container}>
+        <div className="container home-container">
+            <h1 className="title">هذا الموقع لطلب وعرض المساعدة في ما يتعلق بالزلزال في الشمال السوري</h1>
             <div className="card" onClick={requestHelp}>
                 <span>طلب مساعدة</span>
             </div>
