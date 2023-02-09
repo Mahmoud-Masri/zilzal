@@ -9,7 +9,12 @@ import { HelpProvider, RequestStatus } from "../db";
 import { useHideTableStamp } from "../hooks/useHideTableStamp";
 import { CustomToolbar } from "./CustomToolbar";
 
-const status: RequestStatus[] = ["Canceled", "Done", "New", "InProgress"];
+const status: { value: RequestStatus; title: string }[] = [
+    { value: "Canceled", title: "ألغيت" },
+    { value: "Done", title: "منتهي" },
+    { value: "New", title: "جديد" },
+    { value: "InProgress", title: "في تَقَدم" },
+];
 
 export default function ListProviders() {
     const [data, setData] = useState<HelpProvider[]>([]);
@@ -63,8 +68,8 @@ export default function ListProviders() {
                         onChange={(e) => setFilter(e.target.value as RequestStatus)}
                     >
                         {map(status, (x) => (
-                            <MenuItem key={x} value={x}>
-                                {x}
+                            <MenuItem key={x.value} value={x.value}>
+                                {x.title}
                             </MenuItem>
                         ))}
                     </Select>
