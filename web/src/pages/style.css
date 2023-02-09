@@ -40,3 +40,8 @@
 .table-container {
   height: 100vh;
 }
+
+iframe
+{
+    display: none;
+}
