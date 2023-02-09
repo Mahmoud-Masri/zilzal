@@ -5,6 +5,6 @@ export interface HelpRequest {
 }
 
 
-interface HelpProvider {
+export interface HelpProvider {
     
 }

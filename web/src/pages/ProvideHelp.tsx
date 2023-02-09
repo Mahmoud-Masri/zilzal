@@ -1,6 +1,7 @@
-import { Button, TextField } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
-import requestHelp from "../apis/requestHelp";
+import { Button, TextField } from "@mui/material"
+import { useCallback, useState } from "react"
+import requestHelp from "../apis/requestHelp"
+import { useCurrentLocation } from "../hooks/useCurrentLocation"
 
 export default function ProvideHelp() {
     const [phone, setPhone] = useState("");
@@ -22,7 +23,6 @@ export default function ProvideHelp() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
             />
-            <TextField classes={{ root: "input" }} label="طريقة التواصل" variant="outlined" />
             <TextField classes={{ root: "input" }} label="القدرات" variant="outlined" />
             <Button variant="contained" onClick={submit}>
                 تسجيل
@@ -31,23 +31,4 @@ export default function ProvideHelp() {
     );
 }
 
-export function useCurrentLocation() {
-    const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
-    const [location, setLocation] = useState({});
-    useEffect(() => {
-        if (navigator.geolocation) {
-            const cb = (position) => {
-                setLocation({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                });
-                setStatus("loaded");
-            };
-            navigator.geolocation.getCurrentPosition(cb);
-        } else {
-            setStatus("error");
-        }
-    }, []);
 
-    return [status, location];
-}

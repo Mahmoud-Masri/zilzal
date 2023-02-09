@@ -3,8 +3,24 @@
   flex-direction: column;
   padding: 8px;
   direction: rtl;
+  align-items: center;
 }
 
 .input {
   margin-bottom: 16px !important;
+}
+
+.card {
+  margin-bottom: 16px;
+  width: 80%;
+  height: 200px;
+  display: flex;
+  font-size: 24px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background-color: #eee;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
