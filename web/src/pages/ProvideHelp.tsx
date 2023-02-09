@@ -36,9 +36,11 @@ export default function ProvideHelp() {
     const [hasCar, setHasCar] = useState(false);
 
     const [status, location] = useCurrentLocation();
+    const [submitting, setSubmitting] = useState(false);
 
     const submit = useCallback(async () => {
         try {
+            setSubmitting(true);
             const _id = generateUniqueId();
             const res = await provideHelp({
                 phoneNumber: phone,
@@ -64,6 +66,8 @@ export default function ProvideHelp() {
             console.error(e);
 
             alert("حدث خطأ");
+        } finally {
+            setSubmitting(false);
         }
     }, [address, contactInfo, hasCar, location?.lat, location?.lng, note, phone, service]);
 
@@ -115,7 +119,7 @@ export default function ProvideHelp() {
                 onChange={(e) => setContactInfo(e.target.value)}
             />
 
-            <Button variant="contained" onClick={submit}>
+            <Button disabled={submitting} variant="contained" onClick={submit}>
                 تسجيل
             </Button>
         </div>

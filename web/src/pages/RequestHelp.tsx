@@ -24,9 +24,11 @@ export default function RequestHelp() {
     const [reportedSeverity, setReportedSeverity] = useState<RequestSeverity>("unclassified");
 
     const [status, location] = useCurrentLocation();
+    const [submitting, setSubmitting] = useState(false);
 
     const submit = useCallback(async () => {
         try {
+            setSubmitting(true);
             const _id = generateUniqueId();
             const res = await requestHelp({
                 phoneNumber: phone,
@@ -54,6 +56,8 @@ export default function RequestHelp() {
         } catch (e) {
             console.error(e);
             alert("حدث خطأ");
+        } finally {
+            setSubmitting(false);
         }
     }, [address, contactInfo, location?.lat, location?.lng, note, phone, reportedSeverity, service]);
 
@@ -110,7 +114,7 @@ export default function RequestHelp() {
                 onChange={(e) => setContactInfo(e.target.value)}
             />
 
-            <Button variant="contained" onClick={submit}>
+            <Button disabled={submitting} variant="contained" onClick={submit}>
                 تسجيل
             </Button>
         </div>
