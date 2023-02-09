@@ -57,6 +57,8 @@ export interface HelpRequest {
         | WarmingProps
         | OtherProps;
     token: string;
+
+    internalNotes?: string;
 }
 
 export interface HelpProvider {
@@ -70,5 +72,7 @@ export interface HelpProvider {
     lng?: number;
     hasCar: boolean;
     token: string;
-    status: RequestStatus
+    status: RequestStatus;
+
+    internalNotes?: string;
 }

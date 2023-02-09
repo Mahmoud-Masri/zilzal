@@ -51,6 +51,7 @@ export default function ListProviders() {
             setData(data.map((row) => (row._id === id ? { ...row, status: "Done" } : row)));
         });
     };
+
     if (!data) {
         return <div>Loading...</div>;
     }
@@ -91,7 +92,7 @@ export default function ListProviders() {
                     onCellEditCommit={(params) => {
                         const { id, value } = params;
 
-                        UpdateProvide(id as string, { note: value }).catch(() => {
+                        UpdateProvide(id as string, { [params.field]: value }).catch(() => {
                             alert("فشل التحديث");
                         });
                     }}
@@ -105,8 +106,6 @@ export default function ListProviders() {
                         {
                             field: "note",
                             headerName: "ملاحظات",
-                            editable: true,
-                            minWidth: 300,
                         },
                         { field: "status", headerName: "الحالة" },
                         { field: "lat", headerName: "lat" },
@@ -114,6 +113,12 @@ export default function ListProviders() {
                         { field: "country", headerName: "الدولة(تلقائي)" },
                         { field: "region", headerName: "المحافظة(تلقائي)" },
                         { field: "city", headerName: "المنطقة(تلقائي)" },
+                        {
+                            field: "internalNotes",
+                            headerName: "ملاحظات داخلية",
+                            editable: true,
+                            minWidth: 300,
+                        },
                         {
                             field: "actions",
                             headerName: "اجراءات",

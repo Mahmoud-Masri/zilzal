@@ -62,6 +62,8 @@ export interface HelpRequest {
     country?: string;
     region?: string;
     city?: string;
+
+    internalNotes?: string;
 }
 
 export interface HelpProvider {
@@ -80,4 +82,6 @@ export interface HelpProvider {
     country?: string;
     region?: string;
     city?: string;
+
+    internalNotes?: string;
 }

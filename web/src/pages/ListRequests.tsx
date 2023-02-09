@@ -92,14 +92,14 @@ export default function ListRequests() {
                     onCellEditCommit={(params) => {
                         const { id, value } = params;
 
-                        UpdateRequest(id as string, { note: value }).catch(() => {
+                        UpdateRequest(id as string, { [params.field]: value }).catch(() => {
                             alert("فشل التحديث");
                         });
                     }}
                     columns={[
                         { field: "_id", headerName: "_id" },
                         { field: "type", headerName: "الخدمة" },
-                        { field: "status", headerName: "الحالة" },
+                        { field: "status", headerName: "الحالة", valueFormatter: (params) => {} },
                         { field: "reportedSeverity", headerName: "الاهمية المطلوبة" },
                         { field: "severity", headerName: "الاهمية" },
                         { field: "contactInfo", headerName: "معلومات التواصل" },
@@ -108,14 +108,18 @@ export default function ListRequests() {
                         {
                             field: "note",
                             headerName: "ملاحظات",
-                            editable: true,
-                            minWidth: 300,
                         },
                         { field: "lat", headerName: "lat" },
                         { field: "lng", headerName: "lng" },
                         { field: "country", headerName: "الدولة(تلقائي)" },
                         { field: "region", headerName: "المحافظة(تلقائي)" },
                         { field: "city", headerName: "المنطقة(تلقائي)" },
+                        {
+                            field: "internalNotes",
+                            headerName: "ملاحظات داخلية",
+                            editable: true,
+                            minWidth: 300,
+                        },
                         {
                             field: "actions",
                             headerName: "اجراءات",
