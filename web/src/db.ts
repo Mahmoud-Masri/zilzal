@@ -1,6 +1,15 @@
-export type RequestType = ''
+export type RequestType =
+    "Transportation" |
+    "Residence" |
+    "Food" |
+    "Wear" |
+    "Cleaning" |
+    "Medical" |
+    "Warming" |
+    "Other"
+
 export interface HelpRequest {
-    type: RequestType
+    requestType: RequestType
     contactInfo: string
 }
 

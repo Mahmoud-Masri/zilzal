@@ -1,24 +1,27 @@
-import {
-    Button,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
-    TextField,
-} from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useCallback, useState } from "react";
 import requestHelp from "../apis/requestHelp";
 import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import { makeStyles } from "tss-react/mui";
+import { RequestType } from "../db";
 
-const services = ["food", "medicine", "transportation", "other"];
+const services: { value: RequestType; label: string }[] = [
+    { value: "Food", label: "طعام" },
+    { value: "Medical", label: "دواء" },
+    { value: "Other", label: "أخرى" },
+    { value: "Cleaning", label: "نظافة" },
+    { value: "Wear", label: "ملابس" },
+    { value: "Transportation", label: "نقل" },
+    { value: "Residence", label: "سكن" },
+    { value: "Warming", label: "تدفئة" },
+];
 
 export default function ProvideHelp() {
     const { classes } = useStyle();
 
     const [phone, setPhone] = useState("");
     const [city, setCity] = useState("");
-    const [service, setService] = useState("");
+    const [service, setService] = useState<RequestType>("");
     const [note, setNote] = useState("");
 
     const [status, location] = useCurrentLocation();
@@ -31,13 +34,17 @@ export default function ProvideHelp() {
     return (
         <div className={classes.container}>
             <h1>عرض مساعدة</h1>
-            <TextField type='number' label="رقم الهاتف" variant="outlined" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            <TextField
+                type="number"
+                label="رقم الهاتف"
+                variant="outlined"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+            />
             <TextField label="المدينة" variant="outlined" value={city} onChange={(e) => setCity(e.target.value)} />
             <FormControl>
-                <InputLabel >اختر خدمة</InputLabel>
-                <Select
-               
-                value={service} onChange={(e) => setService(e.target.value)}>
+                <InputLabel>اختر خدمة</InputLabel>
+                <Select value={service} onChange={(e) => setService(e.target.value)}>
                     {services.map((name) => (
                         <MenuItem key={name} value={name}>
                             {name}
