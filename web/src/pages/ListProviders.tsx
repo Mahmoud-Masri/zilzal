@@ -88,6 +88,13 @@ export default function ListProviders() {
                     components={{
                         Toolbar: CustomToolbar,
                     }}
+                    onCellEditCommit={(params) => {
+                        const { id, value } = params;
+
+                        UpdateProvide(id as string, { note: value }).catch(() => {
+                            alert("فشل التحديث");
+                        });
+                    }}
                     columns={[
                         { field: "_id", headerName: "_id" },
                         { field: "type", headerName: "الخدمة" },
@@ -95,7 +102,12 @@ export default function ListProviders() {
                         { field: "contactInfo", headerName: "معلومات التواصل" },
                         { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
                         { field: "address", headerName: "العنوان" },
-                        { field: "note", headerName: "ملاحظات" },
+                        {
+                            field: "note",
+                            headerName: "ملاحظات",
+                            editable: true,
+                            minWidth: 300,
+                        },
                         { field: "status", headerName: "الحالة" },
                         { field: "lat", headerName: "lat" },
                         { field: "lng", headerName: "lng" },
