@@ -104,6 +104,7 @@ export default function ListProviders() {
                             headerName: "الحالة",
                             type: "singleSelect",
                             valueOptions: ["New", "InProgress", "Done", "Canceled"],
+                            editable: true,
                         },
                         { field: "hasCar", headerName: "توفر عربية", type: "boolean" },
                         {

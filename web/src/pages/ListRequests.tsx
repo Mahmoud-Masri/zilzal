@@ -104,8 +104,15 @@ export default function ListRequests() {
                             headerName: "الحالة",
                             type: "singleSelect",
                             valueOptions: ["New", "InProgress", "Done", "Canceled"],
+                            editable: true,
                         },
-                        { field: "reportedSeverity", headerName: "الاهمية المطلوبة" },
+                        {
+                            field: "reportedSeverity",
+                            headerName: "الاهمية المطلوبة",
+                            type: "singleSelect",
+                            valueOptions: ["critical", "normal", "low", "unclassified"],
+                            editable: true,
+                        },
                         {
                             field: "internalNotes",
                             headerName: "ملاحظات داخلية",
