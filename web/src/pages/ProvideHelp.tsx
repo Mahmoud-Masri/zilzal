@@ -16,7 +16,7 @@ import generateUniqueId from "../generateUniqueId";
 import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import { token } from "../token";
 
-const services: Record<RequestType, string> = {
+export const services: Record<RequestType, string> = {
     Food: "طعام",
     Medical: "طبي",
     Medicine: "دواء",
@@ -34,6 +34,7 @@ export default function ProvideHelp() {
     const [service, setService] = useState<RequestType>("Clothing");
     const [note, setNote] = useState("");
     const [hasCar, setHasCar] = useState(false);
+    
 
     const [status, location] = useCurrentLocation();
 

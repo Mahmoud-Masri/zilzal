@@ -2,13 +2,14 @@ import React, { useCallback } from "react";
 
 export default function Home() {
     const requestHelp = useCallback(() => {
-        window.location.href = '/request-help'
-    }, [])
+        window.location.href = "/request-help";
+    }, []);
     const provideHelp = useCallback(() => {
-        window.location.href = '/provide-help'
-    }, [])
+        window.location.href = "/provide-help";
+    }, []);
     return (
-        <div className="container">
+        <div className="container home-container">
+            <h1 className="title">هذا الموقع لطلب وعرض المساعدة في ما يتعلق بالزلزال في الشمال السوري</h1>
             <div className="card" onClick={requestHelp}>
                 <span>طلب مساعدة</span>
             </div>
