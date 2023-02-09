@@ -2,6 +2,7 @@ import { DataGridPremium } from "@mui/x-data-grid-premium"
 import { useEffect, useState } from "react"
 import listProviders from "../apis/listProviders"
 import { HelpProvider } from "../db"
+import { useHideTableStamp } from "../hooks/useHideTableStamp"
 
 export default function ListProviders() {
     const [data, setData] = useState<HelpProvider[]>([]);
@@ -10,6 +11,7 @@ export default function ListProviders() {
             setData(data);
         });
     }, []);
+    useHideTableStamp()
 
     if (!data) {
         return <div>Loading...</div>;

@@ -12,3 +12,15 @@ export default async function provideHelp(data: HelpProvider) {
 
     return req.json();
 }
+
+export async function UpdateProvide(id: string, data: HelpProvider) {
+    const req = await fetch(SERVER_URL + "/api/provides" + id, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    return req.json();
+}

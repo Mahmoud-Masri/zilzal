@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import listRequests from "../apis/listRequests";
 import updateRequest from "../apis/updateRequest";
 import { HelpRequest } from "../db";
+import { useHideTableStamp } from "../hooks/useHideTableStamp"
 
 export default function ListRequests() {
     const [data, setData] = useState<HelpRequest[]>([]);
@@ -13,6 +14,8 @@ export default function ListRequests() {
             setData(data);
         });
     }, []);
+
+    useHideTableStamp()
 
     const deleteRow = (id) => {
         updateRequest(id, "Canceled").then(() => {
