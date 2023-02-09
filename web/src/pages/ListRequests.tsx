@@ -1,9 +1,9 @@
-import { Button } from "@mui/material";
-import { DataGridPremium } from "@mui/x-data-grid-premium";
-import { useEffect, useState } from "react";
-import listRequests from "../apis/listRequests";
-import updateRequest from "../apis/updateRequest";
-import { HelpRequest } from "../db";
+import { Button } from "@mui/material"
+import { DataGridPremium } from "@mui/x-data-grid-premium"
+import { useEffect, useState } from "react"
+import listRequests from "../apis/listRequests"
+import { UpdateRequest } from "../apis/requestHelp"
+import { HelpRequest } from "../db"
 import { useHideTableStamp } from "../hooks/useHideTableStamp"
 
 export default function ListRequests() {
@@ -15,22 +15,22 @@ export default function ListRequests() {
         });
     }, []);
 
-    useHideTableStamp()
+    useHideTableStamp();
 
     const deleteRow = (id) => {
-        updateRequest(id, "Canceled").then(() => {
+        UpdateRequest(id, { status: "Canceled" }).then(() => {
             setData(data.map((row) => (row._id === id ? { ...row, status: "Canceled" } : row)));
         });
     };
 
     const inProgress = (id) => {
-        updateRequest(id, "InProgress").then(() => {
+        UpdateRequest(id, { status: "InProgress" }).then(() => {
             setData(data.map((row) => (row._id === id ? { ...row, status: "InProgress" } : row)));
         });
     };
 
     const done = (id) => {
-        updateRequest(id, "Done").then(() => {
+        UpdateRequest(id, { status: "Done" }).then(() => {
             setData(data.map((row) => (row._id === id ? { ...row, status: "Done" } : row)));
         });
     };
