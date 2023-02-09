@@ -2,12 +2,14 @@ import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material
 import { Box } from "@mui/system";
 import { DataGridPremium } from "@mui/x-data-grid-premium";
 import map from "lodash/map";
+import keys from "lodash/keys";
 import { useEffect, useMemo, useState } from "react";
 import listRequests from "../apis/listRequests";
 import { UpdateRequest } from "../apis/requestHelp";
 import { HelpRequest, RequestStatus } from "../db";
 import { useHideTableStamp } from "../hooks/useHideTableStamp";
 import { CustomToolbar } from "./CustomToolbar";
+import { services } from "./ProvideHelp";
 
 const status: { value: RequestStatus; title: string }[] = [
     { value: "Canceled", title: "ألغيت" },
@@ -98,7 +100,13 @@ export default function ListRequests() {
                     }}
                     columns={[
                         { field: "_id", headerName: "_id" },
-                        { field: "type", headerName: "الخدمة" },
+                        {
+                            field: "type",
+                            headerName: "الخدمة",
+                            type: "singleSelect",
+                            valueOptions: keys(services),
+                            editable: true,
+                        },
                         {
                             field: "status",
                             headerName: "الحالة",
@@ -120,12 +128,23 @@ export default function ListRequests() {
                             minWidth: 300,
                         },
                         // { field: "severity", headerName: "الاهمية" },
-                        { field: "phoneNumber", headerName: "رقم الهاتف", width: 150 },
-                        { field: "address", headerName: "العنوان", width: 280 },
+                        {
+                            field: "phoneNumber",
+                            headerName: "رقم الهاتف",
+                            width: 150,
+                            editable: true,
+                        },
+                        {
+                            field: "address",
+                            headerName: "العنوان",
+                            width: 280,
+                            editable: true,
+                        },
                         {
                             field: "note",
                             headerName: "ملاحظات",
                             width: 300,
+                            editable: true,
                         },
 
                         {
@@ -163,7 +182,12 @@ export default function ListRequests() {
                                 );
                             },
                         },
-                        { field: "contactInfo", headerName: "معلومات التواصل", width: 200 },
+                        {
+                            field: "contactInfo",
+                            headerName: "معلومات التواصل",
+                            width: 200,
+                            editable: true,
+                        },
                         { field: "lat", headerName: "lat" },
                         { field: "lng", headerName: "lng" },
                         { field: "country", headerName: "الدولة(تلقائي)" },

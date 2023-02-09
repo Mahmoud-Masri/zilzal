@@ -2,12 +2,14 @@ import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material
 import { Box } from "@mui/system";
 import { DataGridPremium } from "@mui/x-data-grid-premium";
 import map from "lodash/map";
+import keys from "lodash/keys";
 import { useEffect, useMemo, useState } from "react";
 import listProviders from "../apis/listProviders";
 import { UpdateProvide } from "../apis/provideHelp";
 import { HelpProvider, RequestStatus } from "../db";
 import { useHideTableStamp } from "../hooks/useHideTableStamp";
 import { CustomToolbar } from "./CustomToolbar";
+import { services } from "./ProvideHelp";
 
 const status: { value: RequestStatus; title: string }[] = [
     { value: "Canceled", title: "ألغيت" },
@@ -98,7 +100,13 @@ export default function ListProviders() {
                     }}
                     columns={[
                         { field: "_id", headerName: "_id" },
-                        { field: "type", headerName: "الخدمة" },
+                        {
+                            field: "type",
+                            headerName: "الخدمة",
+                            type: "singleSelect",
+                            valueOptions: keys(services),
+                            editable: true,
+                        },
                         {
                             field: "status",
                             headerName: "الحالة",
@@ -106,19 +114,35 @@ export default function ListProviders() {
                             valueOptions: ["New", "InProgress", "Done", "Canceled"],
                             editable: true,
                         },
-                        { field: "hasCar", headerName: "توفر عربية", type: "boolean" },
+                        {
+                            field: "hasCar",
+                            headerName: "توفر عربية",
+                            type: "boolean",
+                            editable: true,
+                        },
                         {
                             field: "internalNotes",
                             headerName: "ملاحظات داخلية",
                             editable: true,
                             minWidth: 300,
                         },
-                        { field: "phoneNumber", headerName: "رقم الهاتف", width: 150 },
-                        { field: "address", headerName: "العنوان", width: 280 },
+                        {
+                            field: "phoneNumber",
+                            headerName: "رقم الهاتف",
+                            width: 150,
+                            editable: true,
+                        },
+                        {
+                            field: "address",
+                            headerName: "العنوان",
+                            width: 280,
+                            editable: true,
+                        },
                         {
                             field: "note",
                             headerName: "ملاحظات",
                             width: 300,
+                            editable: true,
                         },
 
                         {
@@ -158,13 +182,16 @@ export default function ListProviders() {
                                 );
                             },
                         },
+                        {
+                            field: "contactInfo",
+                            headerName: "معلومات التواصل",
+                            editable: true,
+                        },
                         { field: "lat", headerName: "lat" },
                         { field: "lng", headerName: "lng" },
                         { field: "country", headerName: "الدولة(تلقائي)" },
                         { field: "region", headerName: "المحافظة(تلقائي)" },
                         { field: "city", headerName: "المنطقة(تلقائي)" },
-
-                        { field: "contactInfo", headerName: "معلومات التواصل" },
                     ]}
                 />
             </Box>
