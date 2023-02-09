@@ -1,8 +1,8 @@
-import { Button } from "@mui/material"
 import { DataGridPremium } from "@mui/x-data-grid-premium"
 import { useEffect, useState } from "react"
 import listRequests from "../apis/listRequests"
 import { HelpRequest } from "../db"
+import { useHideTableStamp } from "../hooks/useHideTableStamp"
 
 export default function ListRequests() {
     const [data, setData] = useState<HelpRequest[]>([]);
@@ -11,6 +11,8 @@ export default function ListRequests() {
             setData(data);
         });
     }, []);
+
+    useHideTableStamp()
 
     const deleteRow = (id) => {
         console.log(id);
@@ -50,39 +52,7 @@ export default function ListRequests() {
                     { field: "country", headerName: "الدولة(تلقائي)" },
                     { field: "region", headerName: "المحافظة(تلقائي)" },
                     { field: "city", headerName: "المنطقة(تلقائي)" },
-                    {
-                        field: "delete",
-                        headerName: "حذف",
-                        renderCell: (params) => {
-                            return (
-                                <Button variant="contained" color="error" onClick={() => deleteRow(params.row._id)}>
-                                    حذف
-                                </Button>
-                            );
-                        },
-                    },
-                    {
-                        field: "inProgress",
-                        headerName: " قيد التنفيذ",
-                        renderCell: (params) => {
-                            return (
-                                <Button variant="contained" color="primary" onClick={() => inProgress(params.row._id)}>
-                                    قيد التنفيذ
-                                </Button>
-                            );
-                        },
-                    },
-                    {
-                        field: "done",
-                        headerName: "تم الانجاز",
-                        renderCell: (params) => {
-                            return (
-                                <Button variant="contained" color="primary" onClick={() => done(params.row._id)}>
-                                    تم الانجاز
-                                </Button>
-                            );
-                        },
-                    },
+                    
                 ]}
             />
         </div>
