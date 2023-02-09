@@ -74,6 +74,7 @@ iframe {
 
 #root {
     height: 100vh;
+    overflow-y: auto;
 }
 
 .map-container {

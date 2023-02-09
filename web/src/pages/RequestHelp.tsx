@@ -23,7 +23,7 @@ export default function RequestHelp() {
     const [note, setNote] = useState("");
     const [reportedSeverity, setReportedSeverity] = useState<RequestSeverity>("unclassified");
 
-    const [status, location] = useCurrentLocation();
+    const [, location] = useCurrentLocation();
     const [submitting, setSubmitting] = useState(false);
 
     const submit = useCallback(async () => {
@@ -79,7 +79,9 @@ export default function RequestHelp() {
             />
             <FormControl classes={{ root: "input" }}>
                 <InputLabel>اختر خدمة</InputLabel>
-                <Select value={service} onChange={(e) => setService(e.target.value as RequestType)}>
+                <Select 
+                label="اختر خدمة"
+                value={service} onChange={(e) => setService(e.target.value as RequestType)}>
                     {map(services, (name, type) => (
                         <MenuItem key={name} value={type}>
                             {name}
@@ -92,6 +94,7 @@ export default function RequestHelp() {
                 <Select
                     value={reportedSeverity}
                     onChange={(e) => setReportedSeverity(e.target.value as RequestSeverity)}
+                    label="الخطورة"
                 >
                     {map(severity, (name, type) => (
                         <MenuItem key={name} value={type}>
