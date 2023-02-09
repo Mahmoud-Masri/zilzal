@@ -1,4 +1,5 @@
 import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Box } from "@mui/system";
 import { DataGridPremium } from "@mui/x-data-grid-premium";
 import map from "lodash/map";
 import { useEffect, useMemo, useState } from "react";
@@ -50,97 +51,92 @@ export default function ListProviders() {
     }
 
     return (
-        <div className="container table-container">
-            <FormControl classes={{ root: "input" }}>
-                <InputLabel>فلتر</InputLabel>
-                <Select
-                    style={{ maxWidth: 320 }}
-                    value={filter}
-                    onChange={(e) => setFilter(e.target.value as RequestStatus)}
-                >
-                    {map(status, (x) => (
-                        <MenuItem key={x} value={x}>
-                            {x}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+        <div className="table-container">
+            <div className="list-header">
+                <FormControl>
+                    <InputLabel>فلتر</InputLabel>
 
-            <Button variant="contained" color="primary" onClick={update}>
-                تحديث
-            </Button>
+                    <Select
+                        size="small"
+                        style={{ maxWidth: 320, flex: 1, minWidth: 200 }}
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value as RequestStatus)}
+                    >
+                        {map(status, (x) => (
+                            <MenuItem key={x} value={x}>
+                                {x}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
 
-            <DataGridPremium
-                className="table"
-                getRowId={(row) => row._id}
-                rows={filteredData}
-                components={{
-                    Toolbar: CustomToolbar,
-                }}
-                columns={[
-                    { field: "_id", headerName: "_id" },
-                    { field: "type", headerName: "الخدمة" },
-                    { field: "hasCar", headerName: "توفر عربية" },
-                    { field: "contactInfo", headerName: "معلومات التواصل" },
-                    { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
-                    { field: "address", headerName: "العنوان" },
-                    { field: "note", headerName: "ملاحظات" },
-                    { field: "status", headerName: "الحالة" },
-                    { field: "lat", headerName: "lat" },
-                    { field: "lng", headerName: "lng" },
-                    { field: "country", headerName: "الدولة(تلقائي)" },
-                    { field: "region", headerName: "المحافظة(تلقائي)" },
-                    { field: "city", headerName: "المنطقة(تلقائي)" },
-                    {
-                        field: "delete",
-                        headerName: "حذف",
-                        renderCell: (params) => {
-                            return (
-                                <Button
-                                    disabled={params.row.status === "Canceled"}
-                                    variant="contained"
-                                    color="error"
-                                    onClick={() => deleteRow(params.row._id)}
-                                >
-                                    حذف
-                                </Button>
-                            );
+                <Button variant="contained" color="primary" onClick={update}>
+                    تحديث
+                </Button>
+            </div>
+
+            <Box sx={{ width: "calc(100% - 16px)", alignSelf: "center", flex: 1 }}>
+                <DataGridPremium
+                    className="table"
+                    getRowId={(row) => row._id}
+                    rows={filteredData}
+                    components={{
+                        Toolbar: CustomToolbar,
+                    }}
+                    columns={[
+                        { field: "_id", headerName: "_id" },
+                        { field: "type", headerName: "الخدمة" },
+                        { field: "hasCar", headerName: "توفر عربية" },
+                        { field: "contactInfo", headerName: "معلومات التواصل" },
+                        { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
+                        { field: "address", headerName: "العنوان" },
+                        { field: "note", headerName: "ملاحظات" },
+                        { field: "status", headerName: "الحالة" },
+                        { field: "lat", headerName: "lat" },
+                        { field: "lng", headerName: "lng" },
+                        { field: "country", headerName: "الدولة(تلقائي)" },
+                        { field: "region", headerName: "المحافظة(تلقائي)" },
+                        { field: "city", headerName: "المنطقة(تلقائي)" },
+                        {
+                            field: "actions",
+                            headerName: "اجراءات",
+                            width: 264,
+                            renderCell: (params) => {
+                                return (
+                                    <div style={{ display: "flex", gap: 8 }}>
+                                        <Button
+                                            disabled={params.row.status === "Canceled"}
+                                            variant="contained"
+                                            color="error"
+                                            onClick={() => deleteRow(params.row._id)}
+                                        >
+                                            حذف
+                                        </Button>
+
+                                        <Button
+                                            disabled={params.row.status === "InProgress"}
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={() => inProgress(params.row._id)}
+                                        >
+                                            قيد التنفيذ
+                                        </Button>
+
+                                        <Button
+                                            disabled={params.row.status === "Done"}
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={() => done(params.row._id)}
+                                        >
+                                            تم الانجاز
+                                        </Button>
+                                    </div>
+                                );
+                            },
                         },
-                    },
-                    {
-                        field: "inProgress",
-                        headerName: " قيد التنفيذ",
-                        renderCell: (params) => {
-                            return (
-                                <Button
-                                    disabled={params.row.status === "InProgress"}
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => inProgress(params.row._id)}
-                                >
-                                    قيد التنفيذ
-                                </Button>
-                            );
-                        },
-                    },
-                    {
-                        field: "done",
-                        headerName: "تم الانجاز",
-                        renderCell: (params) => {
-                            return (
-                                <Button
-                                    disabled={params.row.status === "Done"}
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => done(params.row._id)}
-                                >
-                                    تم الانجاز
-                                </Button>
-                            );
-                        },
-                    },
-                ]}
-            />
+                    ]}
+                />
+            </Box>
         </div>
     );
 }

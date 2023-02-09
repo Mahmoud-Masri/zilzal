@@ -1,3 +1,15 @@
+html {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
 .home-container {
     align-items: center;
 }
@@ -6,15 +18,13 @@
     font-size: 32px;
     text-align: center;
 }
+
 .container {
     display: flex;
     flex-direction: column;
-    padding: 8px;
     direction: rtl;
-}
-
-.input {
-    margin-bottom: 16px !important;
+    padding: 12px;
+    gap: 12px;
 }
 
 .card {
@@ -33,32 +43,41 @@
 }
 
 .table {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    direction: rtl;
+    direction: ltr;
 }
 
 .table-container {
     direction: ltr !important;
     height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    max-width: 100vw;
+    display: flex;
+    padding: 0;
+    flex-direction: column;
+}
+
+.list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px;
+}
+
+.filter-container {
+    min-width: 300px;
 }
 
 iframe {
     display: none;
 }
 
-.MuiDataGrid-columnSeparator--sideRight {
-    right: unset !important;
-    left: -8px;
-}
-
 #root {
-  height: 100vh;
+    height: 100vh;
 }
 
 .map-container {
-  height: 100%;
-  overflow: hidden;
-  padding:64px;
+    height: 100%;
+    overflow: hidden;
+    padding: 64px;
 }
