@@ -1,11 +1,12 @@
-import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
-import { DataGridPremium } from "@mui/x-data-grid-premium"
-import map from "lodash/map"
-import { useEffect, useMemo, useState } from "react"
-import listRequests from "../apis/listRequests"
-import { UpdateRequest } from "../apis/requestHelp"
-import { HelpRequest, RequestStatus } from "../db"
-import { useHideTableStamp } from "../hooks/useHideTableStamp"
+import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { DataGridPremium } from "@mui/x-data-grid-premium";
+import map from "lodash/map";
+import { useEffect, useMemo, useState } from "react";
+import listRequests from "../apis/listRequests";
+import { UpdateRequest } from "../apis/requestHelp";
+import { HelpRequest, RequestStatus } from "../db";
+import { useHideTableStamp } from "../hooks/useHideTableStamp";
+import { CustomToolbar } from "./CustomToolbar";
 
 const status: RequestStatus[] = ["Canceled", "Done", "New", "InProgress"];
 
@@ -66,6 +67,9 @@ export default function ListRequests() {
                 className="table"
                 getRowId={(row) => row._id}
                 rows={filteredData}
+                components={{
+                    Toolbar: CustomToolbar,
+                }}
                 columns={[
                     { field: "_id", headerName: "_id" },
                     { field: "type", headerName: "الخدمة" },

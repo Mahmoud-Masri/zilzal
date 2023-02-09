@@ -1,11 +1,12 @@
-import { FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
-import { DataGridPremium } from "@mui/x-data-grid-premium";
-import { useEffect, useMemo, useState } from "react";
-import listProviders from "../apis/listProviders";
-import { HelpProvider, RequestStatus } from "../db";
-import { useHideTableStamp } from "../hooks/useHideTableStamp";
-import map from "lodash/map";
-import { UpdateProvide } from "../apis/provideHelp";
+import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
+import { DataGridPremium } from "@mui/x-data-grid-premium"
+import map from "lodash/map"
+import { useEffect, useMemo, useState } from "react"
+import listProviders from "../apis/listProviders"
+import { UpdateProvide } from "../apis/provideHelp"
+import { HelpProvider, RequestStatus } from "../db"
+import { useHideTableStamp } from "../hooks/useHideTableStamp"
+import { CustomToolbar } from "./CustomToolbar"
 
 const status: RequestStatus[] = ["Canceled", "Done", "New", "InProgress"];
 
@@ -63,7 +64,9 @@ export default function ListProviders() {
                 className="table"
                 getRowId={(row) => row._id}
                 rows={filteredData}
-                experimentalFeatures={{ newEditingApi: true }}
+                components={{
+                    Toolbar: CustomToolbar,
+                }}
                 columns={[
                     { field: "_id", headerName: "_id" },
                     { field: "type", headerName: "الخدمة" },
