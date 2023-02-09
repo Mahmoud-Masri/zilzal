@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 
 
+
 export function useCurrentLocation() {
     const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading")
     const [location, setLocation] = useState({})
