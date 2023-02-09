@@ -1,10 +1,10 @@
-import { Button } from "@mui/material"
-import { DataGridPremium } from "@mui/x-data-grid-premium"
-import { useEffect, useState } from "react"
-import listRequests from "../apis/listRequests"
-import { UpdateRequest } from "../apis/requestHelp"
-import { HelpRequest } from "../db"
-import { useHideTableStamp } from "../hooks/useHideTableStamp"
+import { Button } from "@mui/material";
+import { DataGridPremium } from "@mui/x-data-grid-premium";
+import { useEffect, useState } from "react";
+import listRequests from "../apis/listRequests";
+import { UpdateRequest } from "../apis/requestHelp";
+import { HelpRequest } from "../db";
+import { useHideTableStamp } from "../hooks/useHideTableStamp";
 
 export default function ListRequests() {
     const [data, setData] = useState<HelpRequest[]>([]);
@@ -52,7 +52,7 @@ export default function ListRequests() {
                     { field: "reportedSeverity", headerName: "الاهمية المطلوبة" },
                     { field: "severity", headerName: "الاهمية" },
                     { field: "contactInfo", headerName: "معلومات التواصل" },
-                    { field: "phoneNumber", headerName: "رقم الهاتف" },
+                    { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
                     { field: "address", headerName: "العنوان" },
                     { field: "note", headerName: "ملاحظات" },
                     { field: "lat", headerName: "lat" },

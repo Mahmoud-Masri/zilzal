@@ -1,10 +1,10 @@
-import { Button } from "@mui/material"
-import { DataGridPremium } from "@mui/x-data-grid-premium"
-import { useEffect, useState } from "react"
-import listProviders from "../apis/listProviders"
-import { UpdateProvide } from "../apis/provideHelp"
-import { HelpProvider } from "../db"
-import { useHideTableStamp } from "../hooks/useHideTableStamp"
+import { Button } from "@mui/material";
+import { DataGridPremium } from "@mui/x-data-grid-premium";
+import { useEffect, useState } from "react";
+import listProviders from "../apis/listProviders";
+import { UpdateProvide } from "../apis/provideHelp";
+import { HelpProvider } from "../db";
+import { useHideTableStamp } from "../hooks/useHideTableStamp";
 
 export default function ListProviders() {
     const [data, setData] = useState<HelpProvider[]>([]);
@@ -13,7 +13,7 @@ export default function ListProviders() {
             setData(data);
         });
     }, []);
-    useHideTableStamp()
+    useHideTableStamp();
 
     const deleteRow = (id) => {
         UpdateProvide(id, { status: "Canceled" }).then(() => {
@@ -42,13 +42,13 @@ export default function ListProviders() {
                 className="table"
                 getRowId={(row) => row._id}
                 rows={data}
-                experimentalFeatures={{ newEditingApi: true }} 
+                experimentalFeatures={{ newEditingApi: true }}
                 columns={[
                     { field: "_id", headerName: "_id" },
                     { field: "type", headerName: "الخدمة" },
                     { field: "hasCar", headerName: "توفر عربية" },
                     { field: "contactInfo", headerName: "معلومات التواصل" },
-                    { field: "phoneNumber", headerName: "رقم الهاتف" },
+                    { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
                     { field: "address", headerName: "العنوان" },
                     { field: "note", headerName: "ملاحظات" },
                     { field: "status", headerName: "الحالة" },
