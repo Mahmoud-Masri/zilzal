@@ -89,6 +89,13 @@ export default function ListRequests() {
                     components={{
                         Toolbar: CustomToolbar,
                     }}
+                    onCellEditCommit={(params) => {
+                        const { id, value } = params;
+
+                        UpdateRequest(id as string, { note: value }).catch(() => {
+                            alert("فشل التحديث");
+                        });
+                    }}
                     columns={[
                         { field: "_id", headerName: "_id" },
                         { field: "type", headerName: "الخدمة" },
@@ -98,7 +105,12 @@ export default function ListRequests() {
                         { field: "contactInfo", headerName: "معلومات التواصل" },
                         { field: "phoneNumber", headerName: "رقم الهاتف", width: 300 },
                         { field: "address", headerName: "العنوان" },
-                        { field: "note", headerName: "ملاحظات" },
+                        {
+                            field: "note",
+                            headerName: "ملاحظات",
+                            editable: true,
+                            minWidth: 300,
+                        },
                         { field: "lat", headerName: "lat" },
                         { field: "lng", headerName: "lng" },
                         { field: "country", headerName: "الدولة(تلقائي)" },
