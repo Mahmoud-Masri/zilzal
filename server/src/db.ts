@@ -75,4 +75,9 @@ export interface HelpProvider {
     lng?: number;
     hasCar: boolean;
     token: string;
+
+    located: boolean;
+    country?: string;
+    region?: string;
+    city?: string;
 }
