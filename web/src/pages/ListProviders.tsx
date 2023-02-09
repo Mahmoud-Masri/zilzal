@@ -1,24 +1,30 @@
-import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
-import { DataGridPremium } from "@mui/x-data-grid-premium"
-import map from "lodash/map"
-import { useEffect, useMemo, useState } from "react"
-import listProviders from "../apis/listProviders"
-import { UpdateProvide } from "../apis/provideHelp"
-import { HelpProvider, RequestStatus } from "../db"
-import { useHideTableStamp } from "../hooks/useHideTableStamp"
-import { CustomToolbar } from "./CustomToolbar"
+import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { DataGridPremium } from "@mui/x-data-grid-premium";
+import map from "lodash/map";
+import { useEffect, useMemo, useState } from "react";
+import listProviders from "../apis/listProviders";
+import { UpdateProvide } from "../apis/provideHelp";
+import { HelpProvider, RequestStatus } from "../db";
+import { useHideTableStamp } from "../hooks/useHideTableStamp";
+import { CustomToolbar } from "./CustomToolbar";
 
 const status: RequestStatus[] = ["Canceled", "Done", "New", "InProgress"];
 
 export default function ListProviders() {
     const [data, setData] = useState<HelpProvider[]>([]);
     const [filter, setFilter] = useState<RequestStatus>("New");
+    const [updateId, setUpdateId] = useState<number>(() => Math.random());
 
     useEffect(() => {
         listProviders().then((data) => {
             setData(data);
         });
-    }, []);
+    }, [updateId]);
+
+    const update = () => {
+        setUpdateId(Math.random());
+    };
+
     useHideTableStamp();
     const filteredData = useMemo(() => data.filter((x) => x.status === filter), [data, filter]);
 
@@ -59,6 +65,10 @@ export default function ListProviders() {
                     ))}
                 </Select>
             </FormControl>
+
+            <Button variant="contained" color="primary" onClick={update}>
+                تحديث
+            </Button>
 
             <DataGridPremium
                 className="table"

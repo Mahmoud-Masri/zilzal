@@ -13,12 +13,17 @@ const status: RequestStatus[] = ["Canceled", "Done", "New", "InProgress"];
 export default function ListRequests() {
     const [data, setData] = useState<HelpRequest[]>([]);
     const [filter, setFilter] = useState<RequestStatus>("New");
+    const [updateId, setUpdateId] = useState<number>(() => Math.random());
     useEffect(() => {
         listRequests().then((data) => {
             console.log(data);
             setData(data);
         });
-    }, []);
+    }, [updateId]);
+
+    const update = () => {
+        setUpdateId(Math.random());
+    };
 
     useHideTableStamp();
 
@@ -63,6 +68,9 @@ export default function ListRequests() {
                 </Select>
             </FormControl>
 
+            <Button variant="contained" color="primary" onClick={update}>
+                تحديث
+            </Button>
             <DataGridPremium
                 className="table"
                 getRowId={(row) => row._id}
