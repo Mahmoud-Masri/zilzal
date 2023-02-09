@@ -9,6 +9,9 @@ export default function Map() {
             <MapContainer center={position} zoom={13} style={{ height: "100vh", width: "100wh" }}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <Marker position={position}>
+                    <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
                 </Marker>
             </MapContainer>
         </div>

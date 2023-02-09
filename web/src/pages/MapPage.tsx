@@ -46,14 +46,24 @@ export default function MapPage() {
                     (provider, i) =>
                         provider.lat &&
                         provider.lng && (
-                            <Marker key={i} icon={greenMarker} position={[provider.lat!, provider.lng!]}></Marker>
+                            <Marker key={i} icon={greenMarker} position={[provider.lat!, provider.lng!]}>
+                                <Popup>
+                                    تقديم مساعدة
+                                    {provider.contactInfo} <br /> {provider.address} <br /> {provider.status}
+                                </Popup>
+                            </Marker>
                         )
                 )}
                 {request.map(
                     (request, i) =>
                         request.lat &&
                         request.lng && (
-                            <Marker key={i} icon={redMarker} position={[request.lat!, request.lng!]}></Marker>
+                            <Marker key={i} icon={redMarker} position={[request.lat!, request.lng!]}>
+                                <Popup>
+                                طلب مساعدة
+                                {request.contactInfo} <br /> {request.address} <br /> الحالة :{request.status}
+                                </Popup>
+                            </Marker>
                         )
                 )}
             </MapContainer>
