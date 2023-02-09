@@ -5,6 +5,7 @@ import * as fs from "fs";
 import * as http from "http";
 import * as https from "https";
 import { api } from "./api";
+import './jobs'
 
 const app = express();
 app.use(cors());
