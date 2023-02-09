@@ -60,12 +60,12 @@ export default function ListProviders() {
             <div className="list-header">
                 <FormControl>
                     <InputLabel>فلتر</InputLabel>
-
                     <Select
                         size="small"
                         style={{ maxWidth: 320, flex: 1, minWidth: 200 }}
                         value={filter}
                         onChange={(e) => setFilter(e.target.value as RequestStatus)}
+                        label="فلتر"
                     >
                         {map(status, (x) => (
                             <MenuItem key={x.value} value={x.value}>

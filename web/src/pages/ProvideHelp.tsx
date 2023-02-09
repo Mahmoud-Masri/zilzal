@@ -90,7 +90,9 @@ export default function ProvideHelp() {
             />
             <FormControl classes={{ root: "input" }}>
                 <InputLabel>اختر خدمة</InputLabel>
-                <Select value={service} onChange={(e) => setService(e.target.value as RequestType)}>
+                <Select
+                label="اختر خدمة"
+                value={service} onChange={(e) => setService(e.target.value as RequestType)}>
                     {map(services, (name, type) => (
                         <MenuItem key={name} value={type}>
                             {name}
