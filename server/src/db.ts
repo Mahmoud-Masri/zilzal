@@ -8,7 +8,7 @@ export type RequestType =
     | "Medicine"
     | "Other";
 
-export type RequestStatus = "New" | "InProgress" | "Done" | "Canceled";
+export type RequestStatus = "New" | "InProgress" | "Done" | "Canceled" | "Deleted";
 
 export type RequestSeverity = "critical" | "normal" | "low" | "unclassified";
 

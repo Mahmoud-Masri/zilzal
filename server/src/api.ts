@@ -7,6 +7,7 @@ api.post("/request-help", async (req, res) => {
     try {
         const collection = await getCollection("requests");
         const data = req.body;
+        data['status'] = "New";
         await collection.insertOne(data);
         res.send({ ok: true });
     } catch (e) {
@@ -32,7 +33,7 @@ api.post("/provide-help", async (req, res) => {
 api.get("/requests", async (req, res) => {
     try {
         const collection = await getCollection("requests");
-        const requests = await collection.find().toArray();
+        const requests = await collection.find({status: {$in: ["New", "InProgress"]}}).toArray();
         res.send(requests);
     } catch (e) {
         console.log(e);
