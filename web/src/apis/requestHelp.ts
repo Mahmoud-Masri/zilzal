@@ -1,5 +1,5 @@
-import { HelpProvider, HelpRequest } from "../db";
-import { SERVER_URL } from "./url";
+import { HelpRequest } from "../db"
+import { SERVER_URL } from "./url"
 
 export default async function requestHelp(data: HelpRequest) {
     const req = await fetch(SERVER_URL + "/api/request-help", {
@@ -13,8 +13,8 @@ export default async function requestHelp(data: HelpRequest) {
     return req.json();
 }
 
-export async function UpdateRequest(id: string, data: HelpRequest) {
-    const req = await fetch(SERVER_URL + "/api/requests" + id, {
+export async function UpdateRequest(id: string, data: Partial<HelpRequest>) {
+    const req = await fetch(SERVER_URL + "/api/requests/" + id, {
         method: "PUT",
         body: JSON.stringify(data),
         headers: {

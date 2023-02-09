@@ -1,6 +1,8 @@
+import { Button } from "@mui/material"
 import { DataGridPremium } from "@mui/x-data-grid-premium"
 import { useEffect, useState } from "react"
 import listProviders from "../apis/listProviders"
+import { UpdateProvide } from "../apis/provideHelp"
 import { HelpProvider } from "../db"
 import { useHideTableStamp } from "../hooks/useHideTableStamp"
 
@@ -13,6 +15,23 @@ export default function ListProviders() {
     }, []);
     useHideTableStamp()
 
+    const deleteRow = (id) => {
+        UpdateProvide(id, { status: "Canceled" }).then(() => {
+            setData(data.map((row) => (row._id === id ? { ...row, status: "Canceled" } : row)));
+        });
+    };
+
+    const inProgress = (id) => {
+        UpdateProvide(id, { status: "InProgress" }).then(() => {
+            setData(data.map((row) => (row._id === id ? { ...row, status: "InProgress" } : row)));
+        });
+    };
+
+    const done = (id) => {
+        UpdateProvide(id, { status: "Done" }).then(() => {
+            setData(data.map((row) => (row._id === id ? { ...row, status: "Done" } : row)));
+        });
+    };
     if (!data) {
         return <div>Loading...</div>;
     }
@@ -38,6 +57,54 @@ export default function ListProviders() {
                     { field: "country", headerName: "الدولة(تلقائي)" },
                     { field: "region", headerName: "المحافظة(تلقائي)" },
                     { field: "city", headerName: "المنطقة(تلقائي)" },
+                    {
+                        field: "delete",
+                        headerName: "حذف",
+                        renderCell: (params) => {
+                            return (
+                                <Button
+                                    disabled={params.row.status === "Canceled"}
+                                    variant="contained"
+                                    color="error"
+                                    onClick={() => deleteRow(params.row._id)}
+                                >
+                                    حذف
+                                </Button>
+                            );
+                        },
+                    },
+                    {
+                        field: "inProgress",
+                        headerName: " قيد التنفيذ",
+                        renderCell: (params) => {
+                            return (
+                                <Button
+                                    disabled={params.row.status === "InProgress"}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => inProgress(params.row._id)}
+                                >
+                                    قيد التنفيذ
+                                </Button>
+                            );
+                        },
+                    },
+                    {
+                        field: "done",
+                        headerName: "تم الانجاز",
+                        renderCell: (params) => {
+                            return (
+                                <Button
+                                    disabled={params.row.status === "Done"}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => done(params.row._id)}
+                                >
+                                    تم الانجاز
+                                </Button>
+                            );
+                        },
+                    },
                 ]}
             />
         </div>
