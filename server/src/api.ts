@@ -39,3 +39,11 @@ api.get("/providers", async (req, res) => {
     const providers = await collection.find().toArray();
     res.send(providers);
 });
+
+api.get("/requests/:requestId", async (req, res) => {
+
+    const collection = await getCollection("requests");
+    await collection.updateOne({_id: req.params.requestId}, req.body);
+    const request = await collection.findOne({_id: req.params.requestId})
+    res.send(request);
+});
