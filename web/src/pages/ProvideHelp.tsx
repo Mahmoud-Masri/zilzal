@@ -6,14 +6,15 @@ import {
     InputLabel,
     MenuItem,
     Select,
-    TextField
-} from "@mui/material"
-import { map } from "lodash"
-import { useCallback, useState } from "react"
-import provideHelp from "../apis/provideHelp"
-import { RequestType } from "../db"
-import { useCurrentLocation } from "../hooks/useCurrentLocation"
-import { token } from "../token"
+    TextField,
+} from "@mui/material";
+import { map } from "lodash";
+import { useCallback, useState } from "react";
+import provideHelp from "../apis/provideHelp";
+import { RequestType } from "../db";
+import generateUniqueId from "../generateUniqueId";
+import { useCurrentLocation } from "../hooks/useCurrentLocation";
+import { token } from "../token";
 
 const services: Record<RequestType, string> = {
     Food: "طعام",
@@ -30,13 +31,14 @@ export default function ProvideHelp() {
     const [phone, setPhone] = useState("");
     const [contactInfo, setContactInfo] = useState("");
     const [address, setAddress] = useState("");
-    const [service, setService] = useState<RequestType>("");
+    const [service, setService] = useState<RequestType>("Clothing");
     const [note, setNote] = useState("");
     const [hasCar, setHasCar] = useState(false);
 
     const [status, location] = useCurrentLocation();
 
     const submit = useCallback(async () => {
+        const _id = generateUniqueId();
         const res = await provideHelp({
             phoneNumber: phone,
             address,
@@ -46,7 +48,8 @@ export default function ProvideHelp() {
             hasCar,
             lat: location?.lat,
             lng: location?.lng,
-            token: token
+            token: token,
+            _id,
         });
 
         if (res.ok) {

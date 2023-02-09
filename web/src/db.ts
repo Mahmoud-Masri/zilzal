@@ -42,6 +42,7 @@ export type WarmingProps = {
 export type OtherProps = {}
 
 export interface HelpRequest {
+    _id: string
     type: RequestType;
     status: RequestStatus;
     severity: RequestSeverity;
@@ -57,6 +58,7 @@ export interface HelpRequest {
 
 
 export interface HelpProvider {
+    _id: string
     type: RequestType;
     contactInfo: string;
     phoneNumber: string;

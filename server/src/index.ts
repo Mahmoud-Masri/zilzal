@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
-app.use("/api/", api);
+app.use("/api", api);
 
 if (process.env.ENABLE_SSL === "true") {
     const privateKey = fs.readFileSync("/etc/letsencrypt/live/server.help23.net/privkey.pem", "utf8");

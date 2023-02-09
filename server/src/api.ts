@@ -18,7 +18,9 @@ api.post("/provide-help", async (req, res) => {
     try {
         const collection = await getCollection("providers");
         const data = req.body;
+        console.log("data", data)
         await collection.insertOne(data);
+        console.log("data", data)
         res.send({ ok: true });
     } catch (e) {
         console.log(e);
