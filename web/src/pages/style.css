@@ -43,3 +43,8 @@
     direction: ltr !important;
     height: 100vh;
 }
+
+iframe
+{
+    display: none;
+}

@@ -1,13 +1,16 @@
-import { DataGridPremium } from "@mui/x-data-grid-premium"
-import { useEffect, useState } from "react"
-import listRequests from "../apis/listRequests"
-import { HelpRequest } from "../db"
+import { Button } from "@mui/material";
+import { DataGridPremium } from "@mui/x-data-grid-premium";
+import { useEffect, useState } from "react";
+import listRequests from "../apis/listRequests";
+import updateRequest from "../apis/updateRequest";
+import { HelpRequest } from "../db";
 import { useHideTableStamp } from "../hooks/useHideTableStamp"
 
 export default function ListRequests() {
     const [data, setData] = useState<HelpRequest[]>([]);
     useEffect(() => {
         listRequests().then((data) => {
+            console.log(data);
             setData(data);
         });
     }, []);
@@ -15,17 +18,22 @@ export default function ListRequests() {
     useHideTableStamp()
 
     const deleteRow = (id) => {
-        console.log(id);
+        updateRequest(id, "Canceled").then(() => {
+            setData(data.map((row) => (row._id === id ? { ...row, status: "Canceled" } : row)));
+        });
     };
 
     const inProgress = (id) => {
-        console.log(id);
+        updateRequest(id, "InProgress").then(() => {
+            setData(data.map((row) => (row._id === id ? { ...row, status: "InProgress" } : row)));
+        });
     };
 
     const done = (id) => {
-        console.log(id);
+        updateRequest(id, "Done").then(() => {
+            setData(data.map((row) => (row._id === id ? { ...row, status: "Done" } : row)));
+        });
     };
-    
 
     if (!data) {
         return <div>Loading...</div>;
@@ -52,7 +60,54 @@ export default function ListRequests() {
                     { field: "country", headerName: "الدولة(تلقائي)" },
                     { field: "region", headerName: "المحافظة(تلقائي)" },
                     { field: "city", headerName: "المنطقة(تلقائي)" },
-                    
+                    {
+                        field: "delete",
+                        headerName: "حذف",
+                        renderCell: (params) => {
+                            return (
+                                <Button
+                                    disabled={params.row.status === "Canceled"}
+                                    variant="contained"
+                                    color="error"
+                                    onClick={() => deleteRow(params.row._id)}
+                                >
+                                    حذف
+                                </Button>
+                            );
+                        },
+                    },
+                    {
+                        field: "inProgress",
+                        headerName: " قيد التنفيذ",
+                        renderCell: (params) => {
+                            return (
+                                <Button
+                                    disabled={params.row.status === "InProgress"}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => inProgress(params.row._id)}
+                                >
+                                    قيد التنفيذ
+                                </Button>
+                            );
+                        },
+                    },
+                    {
+                        field: "done",
+                        headerName: "تم الانجاز",
+                        renderCell: (params) => {
+                            return (
+                                <Button
+                                    disabled={params.row.status === "Done"}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => done(params.row._id)}
+                                >
+                                    تم الانجاز
+                                </Button>
+                            );
+                        },
+                    },
                 ]}
             />
         </div>
