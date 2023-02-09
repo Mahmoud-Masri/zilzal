@@ -42,30 +42,36 @@ export default function MapPage() {
         <div className="map-container">
             <MapContainer center={SyriaLocation} zoom={10} style={{ height: "100vh", width: "100wh" }}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                {providers.map(
-                    (provider, i) =>
-                        provider.lat &&
-                        provider.lng && (
-                            <Marker key={i} icon={greenMarker} position={[provider.lat!, provider.lng!]}>
-                                <Popup>
-                                    تقديم مساعدة
-                                    {provider.contactInfo} <br /> {provider.address} <br /> {provider.status} <br />  النوع :{provider.type}
-                                </Popup>
-                            </Marker>
-                        )
-                )}
-                {request.map(
-                    (request, i) =>
-                        request.lat &&
-                        request.lng && (
-                            <Marker key={i} icon={redMarker} position={[request.lat!, request.lng!]}>
-                                <Popup>
-                                طلب مساعدة
-                                {request.contactInfo} <br /> {request.address} <br /> الحالة :{request.status} <br /> النوع :{request.type}
-                                </Popup>
-                            </Marker>
-                        )
-                )}
+                {providers
+                    .filter((x) => x.status !== "Canceled")
+                    .map(
+                        (provider, i) =>
+                            provider.lat &&
+                            provider.lng && (
+                                <Marker key={i} icon={greenMarker} position={[provider.lat!, provider.lng!]}>
+                                    <Popup>
+                                        تقديم مساعدة
+                                        {provider.phoneNumber} <br /> {provider.address} <br /> {provider.status} <br />{" "}
+                                        النوع :{provider.type}
+                                    </Popup>
+                                </Marker>
+                            )
+                    )}
+                {request
+                    .filter((x) => x.status !== "Canceled")
+                    .map(
+                        (request, i) =>
+                            request.lat &&
+                            request.lng && (
+                                <Marker key={i} icon={redMarker} position={[request.lat!, request.lng!]}>
+                                    <Popup>
+                                        طلب مساعدة
+                                        {request.phoneNumber} <br /> {request.address} <br /> الحالة :{request.status}{" "}
+                                        <br /> النوع :{request.type}
+                                    </Popup>
+                                </Marker>
+                            )
+                    )}
             </MapContainer>
         </div>
     );
