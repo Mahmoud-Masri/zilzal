@@ -40,7 +40,7 @@ export default function MapPage() {
 
     return (
         <div className="map-container">
-            <MapContainer center={SyriaLocation} zoom={13} style={{ height: "100vh", width: "100wh" }}>
+            <MapContainer center={SyriaLocation} zoom={10} style={{ height: "100vh", width: "100wh" }}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 {providers.map(
                     (provider, i) =>
