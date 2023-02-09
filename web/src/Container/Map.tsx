@@ -1,25 +1,14 @@
-import { MapContainer, Marker, Popup } from "react-leaflet";
-import React from "react";
-import "leaflet/dist/leaflet.css";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
 
-const position = [51.505, -0.09] as LatLngTuple;
+const position: LatLngTuple = [38.6696215, 39.1990649];
 
 export default function Map() {
     return (
-        <div style={{ width: 300, height: 300 }}>
-            <MapContainer
-                center={{
-                    lat: 51.505,
-                    lng: -0.09,
-                }}
-                zoom={13}
-                scrollWheelZoom={false}
-            >
+        <div className="map-container">
+            <MapContainer center={position} zoom={13} style={{ height: "100vh", width: "100wh" }}>
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <Marker position={position}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
                 </Marker>
             </MapContainer>
         </div>

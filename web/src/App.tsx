@@ -8,6 +8,7 @@ import RequestHelp from "./pages/RequestHelp";
 import Root from "./pages/Root";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import MapPage from "./pages/MapPage";
 
 const theme = createTheme({
     direction: "rtl",
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
             <Route path="request-help" element={<RequestHelp />} />
             <Route path="list-requests" element={<ListRequests />} />
             <Route path="list-providers" element={<ListProviders />} />
+            <Route path="map" element={<MapPage />} />
             <Route path="" element={<Home />} />
         </Route>
     )

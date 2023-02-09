@@ -14,6 +14,7 @@ export function useCurrentLocation() {
                 })
                 setStatus("loaded")
             }
+            console.log(cb)
             navigator.geolocation.getCurrentPosition(cb)
         } else {
             setStatus("error")
