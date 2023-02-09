@@ -50,7 +50,6 @@ export default function RequestHelp() {
             } else {
                 alert("حدث خطأ");
             }
-
         } catch (e) {
             console.error(e);
             alert("حدث خطأ");
@@ -76,7 +75,7 @@ export default function RequestHelp() {
             />
             <FormControl classes={{ root: "input" }}>
                 <InputLabel>اختر خدمة</InputLabel>
-                <Select value={service} onChange={(e) => setService(e.target.value)}>
+                <Select value={service} onChange={(e) => setService(e.target.value as RequestType)}>
                     {map(services, (name, type) => (
                         <MenuItem key={name} value={type}>
                             {name}
@@ -86,7 +85,10 @@ export default function RequestHelp() {
             </FormControl>
             <FormControl classes={{ root: "input" }}>
                 <InputLabel>الخطورة</InputLabel>
-                <Select value={reportedSeverity} onChange={(e) => setReportedSeverity(e.target.value)}>
+                <Select
+                    value={reportedSeverity}
+                    onChange={(e) => setReportedSeverity(e.target.value as RequestSeverity)}
+                >
                     {map(severity, (name, type) => (
                         <MenuItem key={name} value={type}>
                             {name}

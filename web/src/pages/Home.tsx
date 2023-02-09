@@ -1,10 +1,6 @@
 import React, { useCallback } from "react";
-import { makeStyles } from "tss-react/mui";
-import Map from "../Container/Map";
 
 export default function Home() {
-    const {classes} = useStyles();
-
     const requestHelp = useCallback(() => {
         window.location.href = "/request-help";
     }, []);
@@ -30,13 +26,3 @@ export default function Home() {
         </div>
     );
 }
-
-const useStyles = makeStyles()((theme) => ({
-    container: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: 20,
-        height: "100%",
-    },
-}));
