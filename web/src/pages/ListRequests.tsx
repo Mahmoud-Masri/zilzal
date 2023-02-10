@@ -121,12 +121,6 @@ export default function ListRequests() {
                             valueOptions: ["critical", "normal", "low", "unclassified"],
                             editable: true,
                         },
-                        {
-                            field: "internalNotes",
-                            headerName: "ملاحظات داخلية",
-                            editable: true,
-                            minWidth: 300,
-                        },
                         // { field: "severity", headerName: "الاهمية" },
                         {
                             field: "phoneNumber",
@@ -146,7 +140,16 @@ export default function ListRequests() {
                             width: 300,
                             editable: true,
                         },
-
+                        {
+                            field: "createdAt",
+                            headerName: "تاريخ الإضافة",
+                            editable: true,
+                            valueGetter: (params) => {
+                                return params.row.createdAt ? new Date(params.row.createdAt).toLocaleString() : undefined;
+                            },
+                            type: "dateTime",
+                            width: 200,
+                        },
                         {
                             field: "actions",
                             headerName: "اجراءات",
@@ -183,16 +186,16 @@ export default function ListRequests() {
                             },
                         },
                         {
-                            field: "createdAt",
-                            headerName: "تاريخ الإضافة",
-                            editable: true,
-                            type: "dateTime",
-                        },
-                        {
                             field: "contactInfo",
                             headerName: "معلومات التواصل",
                             width: 200,
                             editable: true,
+                        },
+                        {
+                            field: "internalNotes",
+                            headerName: "ملاحظات داخلية",
+                            editable: true,
+                            minWidth: 300,
                         },
                         { field: "lat", headerName: "lat", type: "number", editable: true },
                         { field: "lng", headerName: "lng", type: "number", editable: true },

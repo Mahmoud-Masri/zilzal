@@ -121,12 +121,6 @@ export default function ListProviders() {
                             editable: true,
                         },
                         {
-                            field: "internalNotes",
-                            headerName: "ملاحظات داخلية",
-                            editable: true,
-                            minWidth: 300,
-                        },
-                        {
                             field: "phoneNumber",
                             headerName: "رقم الهاتف",
                             width: 150,
@@ -186,12 +180,25 @@ export default function ListProviders() {
                             field: "createdAt",
                             headerName: "تاريخ الإضافة",
                             editable: true,
-                            type: 'dateTime'
+                            type: "dateTime",
+                            valueGetter: (params) => {
+                                return params.row.createdAt
+                                    ? new Date(params.row.createdAt).toLocaleString()
+                                    : undefined;
+                            },
+                            width: 200,
                         },
+
                         {
                             field: "contactInfo",
                             headerName: "معلومات التواصل",
                             editable: true,
+                        },
+                        {
+                            field: "internalNotes",
+                            headerName: "ملاحظات داخلية",
+                            editable: true,
+                            minWidth: 300,
                         },
                         {
                             field: "lat",
