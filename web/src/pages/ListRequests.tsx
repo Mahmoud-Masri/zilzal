@@ -188,11 +188,11 @@ export default function ListRequests() {
                             width: 200,
                             editable: true,
                         },
-                        { field: "lat", headerName: "lat" },
-                        { field: "lng", headerName: "lng" },
-                        { field: "country", headerName: "الدولة(تلقائي)" },
-                        { field: "region", headerName: "المحافظة(تلقائي)" },
-                        { field: "city", headerName: "المنطقة(تلقائي)" },
+                        { field: "lat", headerName: "lat", type: "number", editable: true },
+                        { field: "lng", headerName: "lng", type: "number", editable: true },
+                        { field: "country", headerName: "الدولة(تلقائي)", editable: true },
+                        { field: "region", headerName: "المحافظة(تلقائي)", editable: true },
+                        { field: "city", headerName: "المنطقة(تلقائي)", editable: true },
                     ]}
                 />
             </Box>

@@ -15,7 +15,7 @@ body {
 }
 
 .title {
-    font-size: 32px;
+    font-size: 28px;
     text-align: center;
 }
 
@@ -28,9 +28,9 @@ body {
 }
 
 .card {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     width: 80%;
-    height: 200px;
+    height: 120px;
     display: flex;
     font-size: 24px;
     border-radius: 8px;
