@@ -59,6 +59,7 @@ export interface HelpRequest {
     token: string;
 
     internalNotes?: string;
+    createdAt?: Date
 }
 
 export interface HelpProvider {
@@ -75,4 +76,5 @@ export interface HelpProvider {
     status: RequestStatus;
 
     internalNotes?: string;
+    createdAt?: Date
 }

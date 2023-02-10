@@ -183,6 +183,12 @@ export default function ListRequests() {
                             },
                         },
                         {
+                            field: "createdAt",
+                            headerName: "تاريخ الإضافة",
+                            editable: true,
+                            type: "dateTime",
+                        },
+                        {
                             field: "contactInfo",
                             headerName: "معلومات التواصل",
                             width: 200,

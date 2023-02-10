@@ -1,5 +1,5 @@
-import { Router } from "express"
-import { getCollection } from "./mongo"
+import { Router } from "express";
+import { getCollection } from "./mongo";
 
 export const api = Router();
 
@@ -7,8 +7,9 @@ api.post("/request-help", async (req, res) => {
     try {
         const collection = await getCollection("requests");
         const data = req.body;
+        console.log("request-help", data);
         data["status"] = "New";
-        await collection.insertOne(data);
+        await collection.insertOne({ ...data, createdAt: new Date() });
         res.send({ ok: true });
     } catch (e) {
         console.log(e);
@@ -20,9 +21,8 @@ api.post("/provide-help", async (req, res) => {
     try {
         const collection = await getCollection("providers");
         const data = req.body;
-        console.log("data", data);
-        await collection.insertOne(data);
-        console.log("data", data);
+        console.log("provide-help", data);
+        await collection.insertOne({ ...data, createdAt: new Date() });
         res.send({ ok: true });
     } catch (e) {
         console.log(e);
